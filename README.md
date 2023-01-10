@@ -1,6 +1,6 @@
-Home Page branch has the homepage design and style using css and bootstrap
 
-
+homePage
+- Home Page branch has the homepage design and style using css and bootstrap
 
 Resource & Links
 - https://react-bootstrap.github.io/getting-started/introduction/

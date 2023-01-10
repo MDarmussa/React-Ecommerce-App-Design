@@ -8,7 +8,7 @@ function DiscountSection() {
           <Row className="discount-backcolor my-3  mx-2 d-flex text-center align-items-center">
           <Col sm="6">
                <div className="discount-title">
-                    خصم يصل حتي ٣٠٪ علي اجهازه اللاب توب
+                    Enjoy 30% Discount on All Labtops - Limited 1 / person
                </div>
           </Col>
           <Col sm="6">
