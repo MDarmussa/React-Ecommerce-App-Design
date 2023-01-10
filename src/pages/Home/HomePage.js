@@ -1,4 +1,3 @@
-import BrandCard from '../../components/Brand/BrandCard'
 import BrandFeatured from '../../components/Brand/Brandfeatured'
 import DiscountSection from '../../components/Home/DiscountSection'
 import HomeCategory from '../../components/Home/HomeCategory'

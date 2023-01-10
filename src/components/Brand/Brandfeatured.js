@@ -7,10 +7,10 @@ import brand2 from '../../images/brand2.png'
 import brand3 from '../../images/brand3.png'
 
 
-function BrandFeatured({ title, btntitle }) {
+function BrandFeatured({ title, btnTitle }) {
   return (
      <Container>
-          <SubTitle title={title} btntitle={btntitle} />
+          <SubTitle title={title} btntitle={btnTitle} />
           <Row className='my-1 d-flex justify-content-between'>
                <BrandCard img={brand1} />
                <BrandCard img={brand3} />
