@@ -1,9 +1,10 @@
-import HomePgame from "./pages/Home/HomePgame";
+import HomePage from './pages/Home/HomePage'
+
 
 function App() {
   return (
     <div className="App">
-      <HomePgame /> 
+      <HomePage />
     </div>
   );
 }
