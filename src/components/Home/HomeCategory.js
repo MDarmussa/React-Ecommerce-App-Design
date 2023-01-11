@@ -13,7 +13,7 @@ import pic from '../../images/pic.png'
 function HomeCategory() {
   return (
     <Container>
-          <SubTitle title="Categories" btntitle="See More" />
+          <SubTitle title="Categories" btntitle="See More" pathText="/allcategory" />
           <Row className='my-2 d-flex justify-content-between'>
                <CategoryCard title="Dress" img={cloth} background='#F4DB33' />
                <CategoryCard title="Beauty" img={cat2} background='#F4DBA4' />
