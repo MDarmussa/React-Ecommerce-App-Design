@@ -3,10 +3,10 @@ import { Container, Row } from 'react-bootstrap'
 import SubTitle from '../Utilities/SubTitle'
 import ProductCard from './ProductCard'
 
-function CardProductsContainer({ title, btnTitle}) {
+function CardProductsContainer({ title, btnTitle, pathText}) {
   return (
      <Container>
-          <SubTitle title={title} btntitle={btnTitle} />
+          <SubTitle title={title} btntitle={btnTitle} pathText={pathText} />
           <Row className='my-2 d-flex justify-content-between'>
                <ProductCard />
                <ProductCard />

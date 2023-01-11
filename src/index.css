@@ -482,7 +482,10 @@ body {
      font-weight: 800;
      letter-spacing: 0;
      line-height: 28px;
-     text-align: right;
+     text-align: left;
+     margin-top: 45px;
+     margin-bottom: 20px;
+     
    }
    .item-delete-edit {
      color: #979797;
@@ -656,3 +659,6 @@ body {
      text-align: center;
    }
    /* end filter */
+
+
+  

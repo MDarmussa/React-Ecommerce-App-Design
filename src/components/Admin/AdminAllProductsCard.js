@@ -5,9 +5,7 @@ import prod1 from '../../images/prod1.png'
 import favoff from '../../images/fav-off.png'
 import { Link } from 'react-router-dom'
 
-// <Link to="/products/:id" style={{ textDecoration: 'none' }}>  </Link>
-
-function ProductCard() {
+function AdminAllProductsCard() {
   return (
      <Col xs="6" sm="6" md="4" lg="3" className="d-flex">
           <Card
@@ -64,4 +62,4 @@ function ProductCard() {
   )
 }
 
-export default ProductCard
+export default AdminAllProductsCard
