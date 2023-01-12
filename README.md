@@ -1,11 +1,5 @@
-redux:
-- 
-
-
-
-
-
-
+Redux
+- https://react-bootstrap.netlify.app/components/spinners/
 
 
 
