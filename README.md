@@ -9,7 +9,7 @@ Ecommerce Full Stack Project
 - store.js: contains all reducers (combined, middleware,)
 
 
-steps for creating Redux, connecting to backend - the setup:
+steps for creating Redux, connecting to backend - the setup: // Barnd Section
 Start with redux: this sample is for Admin add brands / panel
 - check the endpoint in postman.
 - create reducer file. ex: // src > Redux > reducers > brandReducers.
@@ -19,6 +19,10 @@ Start with redux: this sample is for Admin add brands / panel
 - hook: create folder. ex: brand. // hook > brand
 - hook: create a file to contain all logics. ex: // src > hook > home-brand-hook.js
 - import the hook in the component and loop over the element to return all items. ex: // src > components > Brand > Brandfeatured.js
+
+steps for adding a product // Adding Product
+- component > AdminAddProducts.js >  define all setStates, install a library to upload multiple images
+- 
 
 
 
@@ -45,13 +49,28 @@ Resource & Links
 - https://react-select.com/home     //not used
 - https://react-bootstrap.netlify.app/components/spinners/    
 - https://www.npmjs.com/package/react-detect-offline   not used / see add-subcategory-hook.js for an alternative way
+- https://www.npmjs.com/package/react-multiple-image-input    used in admin page to add multiple image / add new item
 - 
 
 
 
 
-Branched:
+Branches:
 redux1: redux axios
 redux2: category section
 redux3: brand section
 redux4: sub category section
+redux5: Product Section
+
+
+
+TIP: both the following methods fire the state.(dispatch & useSelector)
+*** useEffect *** > dispatch(*** action ***) 
+*** useSelector *** > *** rootReducer ***
+
+ex: in AdminProducts.js
+- dispatch(getAllCategory()) // getAllCategory: categoryAction.js
+- dispatch(getAllBrand()) //getAllBrand: brandAction.js
+
+- const category = useSelector(state => state.allCategory.category) // allCategory: rootReducer.js, category: categoryReducer.js
+- const brand = useSelector(state => state.allBrand.brand) // allBrand: rootReducer.js, brand: brandReducer.js
