@@ -1,7 +1,24 @@
-Redux
-- https://react-bootstrap.netlify.app/components/spinners/
+Ecommerce Full Stack Project
+
+- hooks folder: Is used for axios to deal with the API (GET, POST, DELETE ...etc)
+- hook: Contains all functions and logic
+- Page: Contain all the website pages
+- components: Contain all components that belong to all pages
+- API: Contain our states container
+- rootReducer: contains all reducers as combined to send them to the store.js.
+- store.js: contains all reducers (combined, middleware,)
 
 
+steps for creating Redux, connecting to backend - the setup:
+Start with redux: this sample is for Admin add brands / panel
+- check the endpoint in postman.
+- create reducer file. ex: // src > Redux > reducers > brandReducers.
+- type.js. ex: export const GET_ALL_BRAND = "GET_ALL_BRAND".  // Redux > type.js
+- rootReducer. ex: allBrand: brandReducer. // src > Redux > reducers
+- Action. create file to write methods. ex:  // src > Redux > action > brandAction.js
+- hook: create folder. ex: brand. // hook > brand
+- hook: create a file to contain all logics. ex: // src > hook > home-brand-hook.js
+- import the hook in the component and loop over the element to return all items. ex: // src > components > Brand > Brandfeatured.js
 
 
 
@@ -26,4 +43,4 @@ Resource & Links
 - https://www.npmjs.com/package/react-rating-stars-component
 - https://www.npmjs.com/package/multiselect-react-dropdown
 - https://react-select.com/home     //not used
-
+- https://react-bootstrap.netlify.app/components/spinners/    

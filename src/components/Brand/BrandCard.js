@@ -16,7 +16,7 @@ function BrandCard({img}) {
           height: "151px",
           borderRadius: "8px",
           border: "none",
-          backgroundColor: "#FFFFFF",
+          backgroundColor: "#FFFF",
           }}>
           <Card.Img style={{ width: "100%", height: "151px" }} src={img} />
           </Card>
