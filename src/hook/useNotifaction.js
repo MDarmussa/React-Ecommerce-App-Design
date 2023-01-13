@@ -1,13 +1,13 @@
 
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
 //to make notification to any component
  const notify = (msg, type) => {
-     if(type === "warm")
+     if(type === "warn")
          toast.error(msg);
-     else if(type === "sucess")
+     else if(type === "success")
          toast.success(msg)
      else if(type === "error")
          toast.error(msg)
