@@ -1,23 +1,29 @@
 import React from 'react'
-import { Container, Row } from 'react-bootstrap'
+import { Container, Row, Spinner } from 'react-bootstrap'
 import SubTitle from '../Utilities/SubTitle'
 import BrandCard from './BrandCard'
-import brand1 from '../../images/brand1.png'
-import brand2 from '../../images/brand2.png'
-import brand3 from '../../images/brand3.png'
+import HomeBrandHook from '../../hook/brand/home-brand-hook'
 
+
+//data in <BrandCard img={brand1} data={brand} /> is backend, see postman 
 
 function BrandFeatured({ title, btnTitle }) {
+
+     const [brand, loading] = HomeBrandHook();
+
   return (
      <Container>
           <SubTitle title={title} btntitle={btnTitle} pathText="/allbrand" />
           <Row className='my-1 d-flex justify-content-between'>
-               <BrandCard img={brand1} />
-               <BrandCard img={brand3} />
-               <BrandCard img={brand2} />
-               <BrandCard img={brand1} />
-               <BrandCard img={brand2} />
-               <BrandCard img={brand3} />
+               {
+                    loading === false ? (
+                    brand.data ? (
+                    brand.data.slice(0, 5).map((item, index) => {
+                         return (<BrandCard key={index} img={item.image} />)
+                    })
+                    ) : <h4>No Brands Found</h4>
+                    ) : <Spinner animation="border" variant="primary" />
+               }
           </Row>
      </Container>
   )
