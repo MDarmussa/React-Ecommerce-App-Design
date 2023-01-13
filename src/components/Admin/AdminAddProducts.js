@@ -1,10 +1,50 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Row, Col } from 'react-bootstrap'
 import Multiselect from 'multiselect-react-dropdown';
 import avatar from '../../images/avatar.png'
 import add from '../../images/add.png'
+import MultiImageInput from 'react-multiple-image-input';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllCategory } from '../../redux/actions/categoryAction';
+import { getAllBrand } from '../../redux/actions/brandAction';
+
+
 
 function AdminAddProducts() {
+
+     const dispatch = useDispatch()
+     useEffect(() => {  //useEffect fires the the method in action (both useEffect and useSelector) - must be matched in **action**
+          dispatch(getAllCategory()) // getAllCategory: categoryAction.js
+          dispatch(getAllBrand()) //getAllBrand: brandAction.js
+     }, [])
+
+     //get last category state from redux
+     const category = useSelector(state => state.allCategory.category) // allCategory: rootReducer.js, category: categoryReducer.js
+     const brand = useSelector(state => state.allBrand.brand) // allBrand: rootReducer.js, brand: brandReducer.js
+
+
+     
+     const [images, setImages] = useState([]); //values images products
+     const [prodName, setProdName] = useState(''); //value state
+     const [prodDescription, setProdDescription] = useState('');
+     const [priceBefore, setPriceBefore] = useState('Price Before Discount');
+     const [priceAfter, setPriceAfter] = useState('Price After Discount');
+     const [qty, setQty] = useState('Quantity Available');
+     const [catID, setCatID] = useState('');
+     const [brandID, setBrandID] = useState('');
+     const [subCatID, setSubCatID] = useState([]);
+     const [selectedSubCatID, setSelectedSubCatID] = useState([]);
+
+     //When Select Category, store id
+     const onSelectCategory = (e) => {
+          setCatID(e.target.value)
+     }
+          console.log(onSelectCategory)
+
+     const onSelectBrand = (e) => {
+          setBrandID(e.target.value)
+     }
+          console.log(brandID)
 
      const onSelect = () => {
 
@@ -24,8 +64,18 @@ function AdminAddProducts() {
                <div className="admin-content-text pb-4"> اضافه منتج جديد</div>
                <Col sm="8">
                <div className="text-form pb-2"> صور للمنتج</div>
-               <img src={avatar} alt="" height="100px" width="120px" />
+               
+               <MultiImageInput
+                    images={images}
+                    setImages={setImages}
+                    theme={"light"}
+                    allowCrop={false}
+                    max={4}
+               />
+
                <input
+                    value={prodName}
+                    onChange={(e) => setProdName(e.target.value)}
                     type="text"
                     className="input-form d-block mt-3 px-3"
                     placeholder="اسم المنتج"
@@ -35,26 +85,44 @@ function AdminAddProducts() {
                     rows="4"
                     cols="50"
                     placeholder="وصف المنتج"
+                    value={prodDescription}
+                    onChange={(e) => setProdDescription(e.target.value)}
                />
                <input
                     type="number"
                     className="input-form d-block mt-3 px-3"
-                    placeholder="السعر قبل الخصم"
+                    placeholder="price Before Discount"
+                    value={priceBefore}
+                    onChange={(e) => setPriceBefore(e.target.value)}
                />
                <input
                     type="number"
                     className="input-form d-block mt-3 px-3"
-                    placeholder="سعر المنتج"
+                    placeholder="price After Discount"
+                    value={priceAfter}
+                    onChange={(e) => setPriceAfter(e.target.value)}
+               />
+               <input
+                    type="number"
+                    className="input-form d-block mt-3 px-3"
+                    placeholder="Quantity Available"
+                    value={qty}
+                    onChange={(e) => setQty(e.target.value)}
                />
                <select
-                    name="languages"
-                    id="lang"
+                    name="cat"
+                    onChange={onSelectCategory}
                     className="select input-form-area mt-3 px-2 ">
-                    <option value="val">التصنيف الرئيسي</option>
-                    <option value="val">التصنيف الاول</option>
-                    <option value="val2">التصنيف الثاني</option>
-                    <option value="val2">التصنيف الثالث</option>
-                    <option value="val2">التصنيف الرابع</option>
+                    <option value="0">Main Category</option>
+                    {
+                         category.data ? (category.data.map((item,index) => {
+                             return (
+                                 <option key={index} value={item._id}>{item.name}</option>
+                             )
+                         })) : null
+
+                     }
+             
                </select>
 
                <Multiselect
@@ -68,12 +136,17 @@ function AdminAddProducts() {
                />
                <select
                     name="brand"
-                    id="brand"
+                    onChange={onSelectBrand}
                     className="select input-form-area mt-3 px-2 ">
-                    <option value="val">الماركة</option>
-                    <option value="val2">التصنيف الماركة الاولي</option>
-                    <option value="val2">التصنيف الماركة الثانيه</option>
-                    <option value="val2">التصنيف الرابع</option>
+                    <option value="val">Choose a Brand</option>
+                    {
+                         brand.data ? (brand.data.map((item,index) => {
+                             return (
+                                 <option key={index} value={item._id}>{item.name}</option>
+                             )
+                         })) : null
+
+                     }
                </select>
                <div className="text-form mt-3 "> الالوان المتاحه للمنتج</div>
                <div className="mt-1 d-flex">
