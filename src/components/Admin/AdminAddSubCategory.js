@@ -22,7 +22,7 @@ function AdminAddSubCategory() {
                     placeholder="اسم التصنيف الفرعي"
                 />
                 <select name="category" id="cat" className="select mt-3 px-2" onChange={handleChange} >
-                    <option value="0">Choose Main Category</option>
+                    <option value="0">اختر تصنيف رئيسي</option>
                     {
                         category.data ? (category.data.map(item => {
                             return (<option key={item._id} value={item._id}>{item.name}</option>)

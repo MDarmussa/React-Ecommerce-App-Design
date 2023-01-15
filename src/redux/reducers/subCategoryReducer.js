@@ -1,4 +1,4 @@
-import {CREATE_SUB_CATEGORY, GET_ERROR} from "../type"
+import {CREATE_SUB_CATEGORY, GET_ERROR, GET_SUB_CATEGORY} from "../type"
 
 const initial = {
      subcategory: [],
@@ -14,6 +14,11 @@ const subCategoryReducer = (state = initial, action) => {
                     ...state, //original data
                     subcategory: action.payload, // payload can be any
                     loading: false
+               }
+          case GET_SUB_CATEGORY:
+               return{
+                    subcategory: action.payload, 
+                    loading: false,
                }
           case GET_ERROR:
                return{

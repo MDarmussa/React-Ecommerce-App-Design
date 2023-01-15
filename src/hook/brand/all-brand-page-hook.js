@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux' //useDispatch: to fire the method in actions file (ex: getAllBrand)
 import { getAllBrandPage, getAllBrand } from '../../redux/actions/brandAction'
+import baseUrl from '../../API/baseURL'
 
 
 function AllBrandHook() {
