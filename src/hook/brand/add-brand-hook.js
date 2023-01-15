@@ -31,7 +31,7 @@ const AddBrandHook = () => {
     const res = useSelector(state => state.allBrand.brand)
 
     //save data in database
-    const handelSubmit = async (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         if (name === "" || selectedFile === null) {
             console.log('من فضلك اكمل البيانات')
@@ -65,7 +65,7 @@ const AddBrandHook = () => {
         }
     }, [loading])
 
-    return [img, name, loading, isPress, handelSubmit, onImageChange, onChangeName]
+    return [img, name, loading, isPress, handleSubmit, onImageChange, onChangeName]
 };
 
 export default AddBrandHook

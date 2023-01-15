@@ -36,9 +36,9 @@ export const getAllBrandPage = (page) => async(dispatch) => {
 }
 
 //create a brand
-export const createBrand = (formData) => async(dispatch) => {
+export const createBrand = (formData) => async (dispatch) => {
      try {
-          const response = await useInsertDataWithImage("/api/v1/brands", formData)
+          const response = await useInsertDataWithImage(`/api/v1/brands`, formData)
           dispatch({
                type: CREATE_BRAND,
                payload: response,

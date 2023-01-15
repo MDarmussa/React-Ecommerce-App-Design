@@ -50,6 +50,7 @@ Resource & Links
 - https://react-bootstrap.netlify.app/components/spinners/    
 - https://www.npmjs.com/package/react-detect-offline   not used / see add-subcategory-hook.js for an alternative way
 - https://www.npmjs.com/package/react-multiple-image-input    used in admin page to add multiple image / add new item
+- https://www.npmjs.com/package/react-color
 - 
 
 

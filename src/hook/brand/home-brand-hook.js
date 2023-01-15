@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllBrand } from '../../redux/actions/brandAction'
 
@@ -6,7 +6,7 @@ import { getAllBrand } from '../../redux/actions/brandAction'
 
 
 
-function HomeBrandHook() {
+const HomeBrandHook = () => {
 
   const dispatch=useDispatch()
   useEffect(() => {
