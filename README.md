@@ -1,4 +1,4 @@
-Ecommerce Full Stack Project
+Ecommerce Full Stack Project:
 
 - hooks folder: Is used for axios to deal with the API (GET, POST, DELETE ...etc)
 - hook: Contains all functions and logic
