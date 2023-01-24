@@ -13,3 +13,7 @@ export const CREATE_PRODUCTS = "CREATE_PRODUCTS"
 // export const GET_ONE_BRAND = "GET_ONE_BRAND"
 
 export const GET_All_PRODUCTS = "GET_All_PRODUCTS"
+
+export const GET_PRODUCT_DETAILS = "GET_PRODUCT_DETAILS"
+export const GET_ONE_CATEGORY = "GET_ONE_CATEGORY"
+export const GET_ONE_BRAND = "GET_ONE_BRAND"

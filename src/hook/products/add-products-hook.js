@@ -7,7 +7,7 @@ import { getAllCategory } from '../../redux/actions/categoryAction';
 import { getAllBrand } from '../../redux/actions/brandAction';
 import { getOneCategory } from '../../redux/actions/subCategoryAction';
 
-function AddProductsHook() {
+function AdminAddProductsHook() {
 
      const dispatch = useDispatch()
      useEffect(() => {  //useEffect fires the the method in action (both useEffect and useSelector) - must be matched in **action**
@@ -30,11 +30,11 @@ function AddProductsHook() {
 
      const [options, setOptions] = useState([]); //values images products
      const [images, setImages] = useState([]); //values images products
-     const [prodName, setProdName] = useState(''); //value state
      const [prodDescription, setProdDescription] = useState('');
-     const [priceBefore, setPriceBefore] = useState('Price Before Discount');
-     const [priceAfter, setPriceAfter] = useState('Price After Discount');
-     const [qty, setQty] = useState('Quantity Available');
+     const [prodName, setProdName] = useState(''); //value state
+     const [priceBefore, setPriceBefore] = useState();
+     const [priceAfter, setPriceAfter] = useState();
+     const [qty, setQty] = useState();
      const [catID, setCatID] = useState('');
      const [brandID, setBrandID] = useState('');
      const [subCatID, setSubCatID] = useState([]);
@@ -112,18 +112,18 @@ function AddProductsHook() {
 
      //to convert base 64 to file
      function dataURLtoFile(dataurl, filename) {
- 
+
           var arr = dataurl.split(','),
               mime = arr[0].match(/:(.*?);/)[1],
-              bstr = atob(arr[1]), 
-              n = bstr.length, 
+              bstr = atob(arr[1]),
+              n = bstr.length,
               u8arr = new Uint8Array(n);
-              
-          while(n--){
+  
+          while (n--) {
               u8arr[n] = bstr.charCodeAt(n);
           }
-          
-          return new File([u8arr], filename, {type:mime});
+  
+          return new File([u8arr], filename, { type: mime });
       }
 
      
@@ -153,9 +153,18 @@ function AddProductsHook() {
           formData.append("category", catID)
           formData.append("brand", brandID)
           
-          colors.map((item) => formData.append("images", item)) 
+          itemImages.map((item) => formData.append("images", item)) 
           colors.map((color) => formData.append("availableColors", color)) //to save choosen colors in one array
           selectedSubID.map((item) => formData.append("subcategory", item._id))
+
+          console.log(prodName)
+          console.log(prodDescription)
+          console.log(qty)
+          console.log(priceBefore)
+          console.log(imgCover)
+          console.log(catID)
+          console.log(brandID)
+     
 
           setLoading(true)
           await dispatch(createProduct(formData))
@@ -168,31 +177,30 @@ function AddProductsHook() {
      //to make the input empty after loading
      useEffect(() => {
           if(loading === false) {
-               setCatID(0)
                setColors([])
                setImages([])
                setProdName('')
                setProdDescription('')
-               setPriceBefore('Price Before Discount')
-               setPriceAfter('Price After Discount')
-               setQty('Quantity Available')
+               setPriceBefore()
+               setPriceAfter()
+               setQty()
                setBrandID(0)
                setSelectedSubID([])
                setTimeout(() => setLoading(true), 1500)
 
-               if(product) {
-                    if(product.status === 201) {
-                         notify('Added successfully', 'success')
-                    } else {
-                         notify('Added unsuccessfully', 'warn')
-                    }
-               }
-          }
-     }, [loading])
+               if (product) {
+                if (product.status === 201) {
+                    notify("تم الاضافة بنجاح", "success")
+                } else {
+                    notify("هناك مشكله", "error")
+                }
+            }
+        }
+    }, [loading])
      
 
 
   return [onChangeProdName, onChangeDesName, onChangeQty, onChangeColor, onChangePriceAfter, onChangePriceBefor, showColor, category, brand, priceAfter, images, setImages, onSelect, onRemove, options, handleChangeComplete, removeColor, onSelectCategory, handleSubmit, onSelectBrand, colors, priceBefore, qty, prodDescription, prodName]
 }
 
-export default AddProductsHook
+export default AdminAddProductsHook

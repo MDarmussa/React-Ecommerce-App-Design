@@ -7,7 +7,7 @@ function ViewHomeProductHook() {
 
      const dispatch = useDispatch();
      useEffect(() => {
-          dispatch(getAllProducts)
+          dispatch(getAllProducts())
      }, [])
 
      //allProducts will store all the data. it will be sent as a hook or prop to HomePage.js
