@@ -20,7 +20,7 @@ function ProductCard({ item }) {
                backgroundColor: "#FFFFFF",
                boxShadow: "0 2px 2px 0 rgba(151,151,151,0.5)",
                }}>
-               <Link to='/products/:id' style={{TextDecoration: 'none'}}>
+               <Link to={`/products/${item._id}`} style={{TextDecoration: 'none'}}>
                     <Card.Img style={{ height: "228px", width: "100%" }} src={item.imageCover} />
                </Link>
                <div className="d-flex justify-content-end mx-2">

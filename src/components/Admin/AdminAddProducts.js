@@ -1,25 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Row, Col } from 'react-bootstrap'
 import Multiselect from 'multiselect-react-dropdown';
-import avatar from '../../images/avatar.png'
 import add from '../../images/add.png'
 import MultiImageInput from 'react-multiple-image-input';
-import { useDispatch, useSelector } from 'react-redux';
-import { getAllCategory } from '../../redux/actions/categoryAction';
-import { getAllBrand } from '../../redux/actions/brandAction';
 import { CompactPicker } from 'react-color'
-import { getOneCategory } from '../../redux/actions/subCategoryAction';
-import { createProduct } from '../../redux/actions/productsAction';
-import notify from '../../hook/useNotifaction'
-import { ToastContainer, toast } from 'react-toastify';
-import AddProductsHook from '../../hook/products/add-products-hook';
+import { ToastContainer } from 'react-toastify';
+import AdminAddProductsHook from '../../hook/products/add-products-hook'
+
 
 
 
 
 function AdminAddProducts() {
 
-const [onChangeProdName, onChangeDesName, onChangeQty, onChangeColor, onChangePriceAfter, onChangePriceBefor, showColor, category, brand, priceAfter, images, setImages, onSelect, onRemove, options, handleChangeComplete, removeColor, onSelectCategory, handleSubmit, onSelectBrand, colors, priceBefore, qty, prodDescription, prodName] = AddProductsHook();
+const [onChangeProdName, onChangeDesName, onChangeQty, onChangeColor, onChangePriceAfter, onChangePriceBefor, showColor, category, brand, priceAfter, images, setImages, onSelect, onRemove, options, handleChangeComplete, removeColor, onSelectCategory, handleSubmit, onSelectBrand, colors, priceBefore, qty, prodDescription, prodName] = AdminAddProductsHook()
      
   return (
      <div>

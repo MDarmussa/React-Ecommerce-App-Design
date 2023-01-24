@@ -5,7 +5,10 @@ import CardProductsContainer from '../../components/Products/CardProductsContain
 import ProductDetails from '../../components/Products/ProductDetails'
 import RateContainer from '../../components/Rate/RateContainer'
 
+
 function ProductDetailsPage() {
+
+
   return (
     <div style={{minHeight: '670px'}}>
           <CategoryHeader />

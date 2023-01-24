@@ -16,11 +16,11 @@ const brandReducer = (state = initial, action) => {
                     brand: action.payload, // payload can be any
                     loading: false
                }
-          // case GET_ONE_BRAND:
-          //      return {
-          //           oneBrand: action.payload,
-          //           loading: false,
-          //      }
+          case GET_ONE_BRAND:
+               return {
+                    oneBrand: action.payload,
+                    loading: false,
+               }
           case CREATE_BRAND:
                return{
                     brand: action.payload,
