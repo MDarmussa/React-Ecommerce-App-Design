@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAllProducts } from '../../redux/actions/productsAction';
+import { getAllProducts, getAllProductsPage } from '../../redux/actions/productsAction';
 
 
 function ViewSearchProductHook() {
@@ -16,8 +16,18 @@ function ViewSearchProductHook() {
           items = allProducts.data.slice(0, 4) 
      else
           items = []
-     return [items]
-     
+
+     let pagination = [];
+     if(allProducts.paginationResult)
+          pagination = allProducts.paginationResult.numberOfPages;
+     else
+          pagination = []
+
+     const onPress = async (page) => {
+          await dispatch(getAllProductsPage(page, 2))
+     }
+
+     return [items, pagination, onPress]
 }
 
 export default ViewSearchProductHook

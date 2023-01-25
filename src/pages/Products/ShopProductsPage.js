@@ -9,7 +9,11 @@ import ViewSearchProductHook from '../../hook/products/view-search-products-hook
 
 function ShopProductsPage() {
 
-  const [items] = ViewSearchProductHook();
+  const [items, pagination, onPress] = ViewSearchProductHook();
+  if(pagination)
+    var pageCount = pagination;
+  else
+    pagination = 0
 
   return (
     <div style={{minHeight: '670px'}}>

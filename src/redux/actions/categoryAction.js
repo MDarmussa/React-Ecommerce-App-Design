@@ -19,7 +19,23 @@ export const getAllCategory = (limit) => async(dispatch) => {
      }
 }
 
-//get all category with pagination
+//get one category
+export const getOneCategory = (id) => async(dispatch) => {
+     try {
+          const response = await useGetData(`/api/v1/categories/${id}`)
+          dispatch({
+               type: GET_ONE_CATEGORY,
+               payload: response,
+          })
+     } catch(e) {
+          dispatch({
+               type: GET_ERROR,
+               payload: "Error" + e,
+          })
+     }
+}
+
+//get one category with pagination
 export const getAllCategoryPage = (page) => async(dispatch) => {
      try {
           const response = await useGetData(`/api/v1/categories?limit=6&page=${page}`) //this limit is coming from the backend to tell how many item to show in one page which is 3
@@ -52,18 +68,3 @@ export const createCategory = (formData) => async(dispatch) => {
      }
 }
 
-//get one category
-export const getOneCategory = (id) => async(dispatch) => {
-     try {
-          const response = await useGetData(`/api/v1/categories/${id}`)
-          dispatch({
-               type: GET_ONE_CATEGORY,
-               payload: response,
-          })
-     } catch(e) {
-          dispatch({
-               type: GET_ERROR,
-               payload: "Error" + e,
-          })
-     }
-}
