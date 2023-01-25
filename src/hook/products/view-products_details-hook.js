@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getOneProducts } from '../../redux/actions/productsAction';
+import { getOneProducts, getProductLike } from '../../redux/actions/productsAction';
 import mobile from '../../images/mobile.png'
 import { getOneCategory } from '../../redux/actions/categoryAction';
+import { getOneBrand } from '../../redux/actions/brandAction'
 
 
 function viewProductsDetailsHook(prodID) {
@@ -15,6 +16,8 @@ function viewProductsDetailsHook(prodID) {
 
      const oneProducts = useSelector((state) => state.allproducts.oneProduct)
      const oneCategory = useSelector((state) => state.allCategory.oneCategory) //allCategory is coming from the rootReducer.js //oneCategory is coming from categoryReducer.js
+     const oneBrand = useSelector((state) => state.allBrand.oneBrand)
+     const productLike = useSelector((state) => state.allproducts.productLike)
 
      //to show products item
      let item = [];
@@ -26,7 +29,13 @@ function viewProductsDetailsHook(prodID) {
      useEffect(() => {
           if(item.category)
                dispatch(getOneCategory(item.category))
+          if(item.brand)
+               dispatch(getOneBrand(item.brand))
+          if(item.category)
+               dispatch(getProductLike(item.category))
+
      }, [item])
+
 
      //to view images galary
      let images = []
@@ -44,7 +53,21 @@ function viewProductsDetailsHook(prodID) {
      else
           cat = []
 
-     return [item, images, cat]
+     //to show brand item
+     let brand = [];
+     if (oneBrand.data)
+          brand = oneBrand.data;
+     else
+          brand = []
+
+     let prod = []
+     if(productLike)
+       prod = productLike.data;
+     else
+       prod = []
+
+
+     return [item, images, cat, brand, prod]
      
 }
 
