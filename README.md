@@ -51,6 +51,7 @@ Resource & Links
 - https://www.npmjs.com/package/react-detect-offline   not used / see add-subcategory-hook.js for an alternative way
 - https://www.npmjs.com/package/react-multiple-image-input    used in admin page to add multiple image / add new item
 - https://www.npmjs.com/package/react-color
+- https://react-bootstrap.netlify.app/components/modal/#rb-docs-content // Modals dialogs
 - 
 
 
