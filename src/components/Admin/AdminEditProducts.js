@@ -1,6 +1,7 @@
 import Multiselect from 'multiselect-react-dropdown';
 import React from 'react'
 import { Col, Row, ToastContainer } from 'react-bootstrap';
+import add from '../../images/add.png'
 import { CompactPicker } from 'react-color';
 import MultiImageInput from 'react-multiple-image-input';
 import { useParams } from 'react-router-dom'
@@ -69,9 +70,9 @@ function AdminEditProducts() {
                 className="select input-form-area mt-3 px-2 ">
                 <option value="0">Main Category</option>
                 {
-                    category.data ? (category.data.map((item,index) => {
+                    category.data ? (category.data.map((item) => {
                         return (
-                            <option key={index} value={item._id}>{item.name}</option>
+                            <option value={item._id}>{item.name}</option>
                         )
                     })) : null
 
@@ -95,9 +96,9 @@ function AdminEditProducts() {
                 className="select input-form-area mt-3 px-2 ">
                 <option value="0">Choose a Brand</option>
                 {
-                    brand.data ? (brand.data.map((item,index) => {
+                    brand.data ? (brand.data.map((item) => {
                         return (
-                            <option key={index} value={item._id}>{item.name}</option>
+                            <option value={item._id}>{item.name}</option>
                         )
                     })) : null
 
@@ -119,7 +120,7 @@ function AdminEditProducts() {
           }
               
       
-                <img onClick={onChangeColor} alt="" width="30px" height="35px" className="" style={{cursor: 'pointer'}} />
+                <img onClick={onChangeColor} src={add} alt="" width="30px" height="35px" className="" style={{cursor: 'pointer'}} />
                 {
                     showColor === true ? <CompactPicker onChangeComplete={handleChangeComplete} /> : null
                 }

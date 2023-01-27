@@ -6,14 +6,15 @@ import SideFilter from '../../components/Utilities/SideFilter'
 import CardProductsContainer from '../../components/Products/CardProductsContainer'
 import Pagination from '../../components/Utilities/Pagination'
 import ViewSearchProductHook from '../../hook/products/view-search-products-hook'
+import { getAllProducts } from '../../redux/actions/productsAction'
 
 function ShopProductsPage() {
 
-  const [items, pagination, onPress] = ViewSearchProductHook();
+  const [items, pagination, onPress, getProduct, results] = ViewSearchProductHook();
   if(pagination)
     var pageCount = pagination;
   else
-    pagination = 0
+    pageCount = 0
 
   return (
     <div style={{minHeight: '670px'}}>
@@ -21,7 +22,7 @@ function ShopProductsPage() {
           <CategoryHeader />
 
           <Container>
-               <SearchCountResult title={`There is ${items.length} Search Products`} />
+               <SearchCountResult onClick={getProduct} title={`There is ${results} Search Products`} />
                <Row className='d-flex flex-row'>
                   <Col sm='2' xs='2' md='1' className='d-flex'>
                     <SideFilter />
@@ -30,7 +31,7 @@ function ShopProductsPage() {
                     <CardProductsContainer products={items} title="" btnTitle="" />
                   </Col>
                </Row>
-               <Pagination />
+               <Pagination pageCount={pageCount} onPress={onPress} />
           </Container>
 
     </div>

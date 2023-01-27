@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import 'react-toastify/dist/ReactToastify.css';
 import notify from '../../hook/useNotifaction'
-import { createProduct, getOneProducts } from '../../redux/actions/productsAction';
+import { getOneProducts, updateProducts } from '../../redux/actions/productsAction';
 import { getAllCategory } from '../../redux/actions/categoryAction';
 import { getAllBrand } from '../../redux/actions/brandAction';
 import { getOneCategory } from '../../redux/actions/subCategoryAction';
@@ -132,7 +132,6 @@ function AdminEditProductsHook(id) {
 
      //to convert base 64 to file
      function dataURLtoFile(dataurl, filename) {
-
           var arr = dataurl.split(','),
               mime = arr[0].match(/:(.*?);/)[1],
               bstr = atob(arr[1]),
@@ -146,33 +145,92 @@ function AdminEditProductsHook(id) {
           return new File([u8arr], filename, { type: mime });
       }
 
-     
-     const handleSubmit = async (e) => {
 
+     //convert url to file
+     const convertURLtoFile = async (url) => {
+          const response = await fetch(url, { mode: "cors" });
+          const data = await response.blob();
+          const ext = url.split(".").pop();
+          const filename = url.split("/").pop();
+          const metadata = { type: `image/${ext}` };
+          return new File([data], Math.random(), metadata);
+     };
+     
+      //to save data
+     const handleSubmit = async (e) => {
+          e.preventDefault(); // prevent browser to reload
+          if(catID === 0 || prodName === "" || prodDescription === "" || images.length <= 0 || priceBefore <= 0) {
+               notify("Please fill the info", "warn")
+               return;
+          }
+
+          let imgCover = []
+          if(images[0].length <= 1000)
+          {
+               convertURLtoFile(images[0]).then(val => imgCover = val)
+          } else {
+               imgCover = dataURLtoFile(images[0], Math.random() + ".png")
+          }
+
+          let itemImages = []
+          //convert array of base 64 image to file 
+          Array.from(Array(Object.keys(images).length).keys()).map(
+              (item, index) => {
+                  if (images[index].length <= 1000) {
+                      convertURLtoFile(images[index]).then(val => itemImages.push(val))
+                  }
+                  else {
+                      itemImages.push(dataURLtoFile(images[index], Math.random() + ".png"))
+                  }
+              })
+
+
+          const formData = new FormData()
+          formData.append("title", prodName)
+          formData.append("description", prodDescription)
+          formData.append("quantity", qty)
+          formData.append("price", priceBefore)
+          formData.append("imageCover", imgCover)
+          formData.append("category", catID)
+          formData.append("brand", brandID)
+
+          setTimeout(() => {
+               formData.append('imageCover', imgCover)
+               itemImages.map((item) => formData.append("images", item)) 
+          }, 1000)
+          
+          colors.map((color) => formData.append("availableColors", color)) //to save choosen colors in one array
+          selectedSubID.map((item) => formData.append("subcategory", item._id))
+          setTimeout(async () => {
+               setLoading(true)
+               await dispatch(updateProducts(id, formData))
+               setLoading(false)
+          }, 1000)
      }
 
      //get create message 
-     const product = useSelector(state => state.allproducts.products)
+     const product = useSelector(state => state.allproducts.updateProducts) //updateProducts from productsReducer.js
 
      //to make the input empty after loading
      useEffect(() => {
           if(loading === false) {
+               setCatID(0)
                setColors([])
                setImages([])
                setProdName('')
                setProdDescription('')
-               setPriceBefore()
-               setPriceAfter()
-               setQty()
+               setPriceBefore('السعر قبل الخصم')
+               setPriceAfter('السعر بعد الخصم')
+               setQty('الكمية المتاحة')
                setBrandID(0)
                setSelectedSubID([])
                setTimeout(() => setLoading(true), 1500)
 
                if (product) {
-                if (product.status === 201) {
-                    notify("تم الاضافة بنجاح", "success")
+                if (product.status === 200) {
+                    notify("Edit Successfully Completed", "success")
                 } else {
-                    notify("هناك مشكله", "error")
+                    notify("There is a Problem", "error")
                 }
             }
         }

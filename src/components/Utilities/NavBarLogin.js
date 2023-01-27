@@ -3,10 +3,17 @@ import { Navbar, Container, FormControl, Nav } from 'react-bootstrap'
 import logo from '../../images/logo.png'
 import login from '../../images/login.png'
 import cart from '../../images/cart.png'
+import NavbarSearchHook from '../../hook/search/navbar-search-hook'
 
 
 
 function NavBarLogin() {
+
+    const [onChangeSearch, searchWord] = NavbarSearchHook();
+    let word = "";
+    if(localStorage.getItem("searchWord") != null)
+         word = localStorage.getItem("searchWord")
+
   return (
   <Navbar className="sticky-top" bg="dark" variant="dark" expand="sm">
     <Container>
@@ -18,6 +25,8 @@ function NavBarLogin() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
             <FormControl
+                value={word}
+                onChange={onChangeSearch}
                 type="search"
                 placeholder="Search..."
                 className="me-2 w-100 text-center"

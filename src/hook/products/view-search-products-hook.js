@@ -1,33 +1,88 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAllProducts, getAllProductsPage } from '../../redux/actions/productsAction';
+import { getAllProducts, getAllProductsPage, getAllProductsSearch } from '../../redux/actions/productsAction';
 
 
 function ViewSearchProductHook() {
-
+     let limit = 4
      const dispatch = useDispatch();
+
+     const getProduct = async () => {
+          let word = "";
+          if(localStorage.getItem("searchWord") != null)
+               word = localStorage.getItem("searchWord")
+          sortData();
+          await dispatch(getAllProductsSearch(`sort=${sort}&limit=${limit}&keyword=${word}`))
+     }
+
      useEffect(() => {
-          dispatch(getAllProducts(12))
+          getProduct()
      }, [])
 
      const allProducts = useSelector((state) => state.allproducts.allProducts)
+
      let items = [];
-     if(allProducts.data)
-          items = allProducts.data.slice(0, 4) 
-     else
+     try {
+          if(allProducts.data)
+               items = allProducts.data
+          else
           items = []
+     } catch(e) { }
+
 
      let pagination = [];
-     if(allProducts.paginationResult)
-          pagination = allProducts.paginationResult.numberOfPages;
-     else
-          pagination = []
+     try {
+          if(allProducts.paginationResult)
+               pagination = allProducts.paginationResult.numberOfPages;
+          else
+               pagination = []
+     } catch(e) { }
 
+     let results = 0;
+     try {
+          if(allProducts.results) // results from backend
+               results = allProducts.results;
+          else
+               results = 0
+     } catch(e) { }
+
+
+     //when user click pagination
      const onPress = async (page) => {
-          await dispatch(getAllProductsPage(page, 2))
+          let word = "";
+          if(localStorage.getItem("searchWord") != null)
+               word = localStorage.getItem("searchWord")
+          sortData();
+          await dispatch(getAllProductsSearch(`sort=${sort}&limit=${limit}&page=${page}&keyword=${word}`))
      }
 
-     return [items, pagination, onPress]
+
+     let sortType = "", sort;
+     //when user choose sort type
+     const sortData = () => {
+          if(localStorage.getItem("sortType") !== null)
+          {
+              sortType = localStorage.getItem("sortType") 
+          } else {
+               sortType = "";
+          }
+
+          if(sortType === "Price Low to high")
+               sort = "+price"
+          else if(sortType === "Price high to low")
+               sort = "-price"
+          else if(sortType === "")
+               sort = ""
+          else if(sortType === "Most Sold")
+               sort = "-sold"
+          else if(sortType === "Highest Review<")
+               sort = "-ratingsQuantity"
+          else if(sortType === "Most Availability")
+               sort = "-quantity"
+               
+     }
+
+     return [items, pagination, onPress, getProduct, results]
 }
 
 export default ViewSearchProductHook
