@@ -1,7 +1,8 @@
-import { CREATE_PRODUCTS, GET_All_PRODUCTS, GET_PRODUCT_DETAILS, GET_ERROR, GET_PRODUCT_LIKE, DELETE_PRODUCT } from "../type";
+import { CREATE_PRODUCTS, GET_All_PRODUCTS, GET_PRODUCT_DETAILS, GET_ERROR, GET_PRODUCT_LIKE, DELETE_PRODUCT, UPDATE_PRODUCT } from "../type";
 import { useInsertDataWithImage } from "../../hooks/useInsertData";
 import useGetData from "../../hooks/useGetData";
 import useDeleteData from "../../hooks/useDeleteData";
+import { useUpdateDataWithImage } from "../../hooks/useUpdateData";
 
 
 
@@ -97,6 +98,42 @@ export const deleteProducts = (id) => async (dispatch) => {
           const response = await useDeleteData(`/api/v1/products/${id}`)
           dispatch({
                type: DELETE_PRODUCT,
+               payload: response,
+               loading: true
+          })
+     } catch(e) {
+          dispatch({
+               type: GET_ERROR,
+               payload: "Error " + e,
+          })
+     }
+}
+
+
+//update product with id
+export const updateProducts = (id, data) => async (dispatch) => {
+     try {
+          const response = await useUpdateDataWithImage(`/api/v1/products/${id}`, data)
+          dispatch({
+               type: UPDATE_PRODUCT,
+               payload: response,
+               loading: true
+          })
+     } catch(e) {
+          dispatch({
+               type: GET_ERROR,
+               payload: "Error " + e,
+          })
+     }
+}
+
+
+//gat All products with query string
+export const getAllProductsSearch = (queryString) => async (dispatch) => { //this action doesn't have new reducer because we need same data // it user a previous reducer
+     try {
+          const response = await useGetData(`/api/v1/products?${queryString}`) 
+          dispatch({
+               type: GET_All_PRODUCTS,
                payload: response,
                loading: true
           })

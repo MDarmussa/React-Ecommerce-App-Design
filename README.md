@@ -52,7 +52,7 @@ Resource & Links
 - https://www.npmjs.com/package/react-multiple-image-input    used in admin page to add multiple image / add new item
 - https://www.npmjs.com/package/react-color
 - https://react-bootstrap.netlify.app/components/modal/#rb-docs-content // Modals dialogs
-- 
+- https://mybrowseraddon.com/access-control-allow-origin.html?v=0.1.8&type=install
 
 
 
