@@ -6,7 +6,6 @@ import SideFilter from '../../components/Utilities/SideFilter'
 import CardProductsContainer from '../../components/Products/CardProductsContainer'
 import Pagination from '../../components/Utilities/Pagination'
 import ViewSearchProductHook from '../../hook/products/view-search-products-hook'
-import { getAllProducts } from '../../redux/actions/productsAction'
 
 function ShopProductsPage() {
 

@@ -3,7 +3,6 @@ import ViewSearchProductHook from '../products/view-search-products-hook'
 
 function NavbarSearchHook() {
 
-
   const[items, pagination, onPress, getProduct] = ViewSearchProductHook();  
   
   const [searchWord, setSearchWord] = useState('')
@@ -12,6 +11,12 @@ function NavbarSearchHook() {
   const onChangeSearch = (e) => {
      localStorage.setItem("searchWord", e.target.value)
      setSearchWord(e.target.value)
+
+     const path = window.location.pathname //navigate me to the search page when searching in the navbar in the homepage //optional.
+     if(path != "/products") //when searching, it makes reload, no that's a negative feature.
+     {
+      window.location.href = "/products"
+     }
   }
 
   useEffect(() => {

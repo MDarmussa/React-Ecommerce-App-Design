@@ -8,11 +8,10 @@ function ViewSearchProductHook() {
      const dispatch = useDispatch();
 
      const getProduct = async () => {
-          let word = "";
-          if(localStorage.getItem("searchWord") != null)
-               word = localStorage.getItem("searchWord")
+          getStorage();
           sortData();
-          await dispatch(getAllProductsSearch(`sort=${sort}&limit=${limit}&keyword=${word}`))
+
+          await dispatch(getAllProductsSearch(`sort=${sort}&limit=${limit}&keyword=${word}&${queryCat}&${brandCat}${priceFromString}${priceToString}`))
      }
 
      useEffect(() => {
@@ -21,7 +20,9 @@ function ViewSearchProductHook() {
 
      const allProducts = useSelector((state) => state.allproducts.allProducts)
 
-     let items = [];
+     
+     let items = []; let pagination = []; let results = 0;
+
      try {
           if(allProducts.data)
                items = allProducts.data
@@ -29,8 +30,6 @@ function ViewSearchProductHook() {
           items = []
      } catch(e) { }
 
-
-     let pagination = [];
      try {
           if(allProducts.paginationResult)
                pagination = allProducts.paginationResult.numberOfPages;
@@ -38,7 +37,6 @@ function ViewSearchProductHook() {
                pagination = []
      } catch(e) { }
 
-     let results = 0;
      try {
           if(allProducts.results) // results from backend
                results = allProducts.results;
@@ -49,11 +47,37 @@ function ViewSearchProductHook() {
 
      //when user click pagination
      const onPress = async (page) => {
-          let word = "";
+          getStorage();
+          sortData();
+
+          await dispatch(getAllProductsSearch(`sort=${sort}&limit=${limit}&page=${page}&keyword=${word}&${queryCat}&${brandCat}${priceFromString}${priceToString}`))
+     }
+
+     let priceFromString = "", priceToString = "";
+     let word = "", queryCat="", brandCat="", priceFrom=0, priceTo=0;
+     const getStorage = () => {
           if(localStorage.getItem("searchWord") != null)
                word = localStorage.getItem("searchWord")
-          sortData();
-          await dispatch(getAllProductsSearch(`sort=${sort}&limit=${limit}&page=${page}&keyword=${word}`))
+          if(localStorage.getItem("catChecked") != null)
+               queryCat = localStorage.getItem("catCecked")
+          if(localStorage.getItem("brandCecked") != null)
+               brandCat = localStorage.getItem("brandCecked")
+          if(localStorage.getItem("priceFrom") != null)
+               priceFrom = localStorage.getItem("priceFrom")
+          if(localStorage.getItem("priceTo") != null)
+               priceTo = localStorage.getItem("priceTo")
+
+          if(priceFrom === "" || priceFrom <= 0){
+               priceFromString = ""
+          } else {
+               priceFromString = `&price[gt]=${priceFrom}`
+          }
+
+          if(priceTo === "" || priceTo <= 0){
+               priceToString = ""
+          } else {
+               priceToString = `&price[lt]=${priceTo}`
+          }
      }
 
 
