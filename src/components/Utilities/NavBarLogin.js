@@ -1,5 +1,5 @@
-import React from 'react'
-import { Navbar, Container, FormControl, Nav } from 'react-bootstrap'
+import React, { useEffect, useState } from 'react'
+import { Navbar, Container, FormControl, Nav, NavDropdown } from 'react-bootstrap'
 import logo from '../../images/logo.png'
 import login from '../../images/login.png'
 import cart from '../../images/cart.png'
@@ -13,6 +13,20 @@ function NavBarLogin() {
     let word = "";
     if(localStorage.getItem("searchWord") != null)
          word = localStorage.getItem("searchWord")
+
+
+    const [user, setUser] = useState('');
+
+    useEffect(() => {
+        if(localStorage.getItem("user") != null)
+        setUser(JSON.parse(localStorage.getItem("user")))
+    }, [])
+    console.log(user)
+    const logout = () => {
+        localStorage.removeItem("user")
+        setUser('')
+    }
+
 
   return (
   <Navbar className="sticky-top" bg="dark" variant="dark" expand="sm">
@@ -33,11 +47,20 @@ function NavBarLogin() {
                 aria-label="Search"
             />
             <Nav className="me-auto">
-                <Nav.Link href='/login'
-                    className="nav-text d-flex mt-3 justify-content-center">
-                    <img src={login} className="login-img" alt="sfvs" />
-                    <p style={{ color: "white" }}>Login</p>
-                </Nav.Link>
+            {
+                user != '' ? (
+                    <NavDropdown title={user.name} id="basic-nav-dropdown">
+                        <NavDropdown.Item href="#action/3.2">Profile</NavDropdown.Item>
+                        <NavDropdown.Item onClick={logout} href="#action/3.3">Sign Out</NavDropdown.Item>
+                        <NavDropdown.Divider />
+                    </NavDropdown>
+                ) : ( <Nav.Link href='/login'
+                className="nav-text d-flex mt-3 justify-content-center">
+                <img src={login} className="login-img" alt="sfvs" />
+                <p style={{ color: "white" }}>Login</p>
+            </Nav.Link>)
+            }
+               
                 <Nav.Link href='/cart'
                     className="nav-text d-flex mt-3 justify-content-center"
                     style={{ color: "white" }}>
