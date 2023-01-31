@@ -38,26 +38,18 @@ function LoginPage() {
                     </Link>
                 </label>
 
+                <label className="mx-auto my-4">
+                    <Link to="/user/forget-password" style={{textDecoration:'none', color: 'red', fontSize: 'smaller'}}>
+                        Reset Password {" "}
+                    </Link>
+                </label>
+
                 {isPress === true ? (loading === true ? ( 
                     <Spinner animation="border" role="status">
                     </Spinner>) : null) : null}
 
             </Col>
 
-
-            <label className="mx-auto my-4">
-            <Link to="/admin/allproducts" style={{textDecoration:'none'}}>
-                <span style={{ cursor: "pointer" }} className="text-danger">
-                    Admin Login
-                </span>
-            </Link>
-
-            <Link to="/user/allorders" style={{textDecoration:'none'}}>
-                <span style={{ cursor: "pointer" }} className="text-danger mx-3">
-                    User Login
-                </span>
-            </Link>
-        </label>
       </Row>
       <ToastContainer />
     </Container>

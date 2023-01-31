@@ -60,7 +60,7 @@ function AddCategoryHook() {
              setLoading(true)
              setTimeout(() => setIsPress(false), 1000)
              if(res.status === 201) {
-                 notify('Uploading completed successfully', 'sucess')
+                 notify('Uploading completed successfully', 'success')
              }
              else {
                  notify("Uploading Failed", 'error')

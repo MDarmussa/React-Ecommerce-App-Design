@@ -2,7 +2,8 @@ import baseUrl from "../API/baseURL";
 
 const useUpdateDataWithImage = async (url, params) => {
      const config={
-          headers:{"Content-Type":"multipart/form-data"}
+          headers:{"Content-Type":"multipart/form-data",
+          Authorization: `Bearer ${localStorage.getItem("token")}` }
      }
      const res = await baseUrl.put(url, params, config);
      console.log(res.status)
@@ -10,7 +11,10 @@ const useUpdateDataWithImage = async (url, params) => {
 }
 
 const useUpdateData = async (url, params) => {
-     const res = await baseUrl.put(url, params);
+     const config={
+          headers:{Authorization: `Bearer ${localStorage.getItem("token")}` }
+     }
+     const res = await baseUrl.put(url, params, config);
      return res;
 }
 
