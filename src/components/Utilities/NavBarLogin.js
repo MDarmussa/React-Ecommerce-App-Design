@@ -4,24 +4,31 @@ import logo from '../../images/logo.png'
 import login from '../../images/login.png'
 import cart from '../../images/cart.png'
 import NavbarSearchHook from '../../hook/search/navbar-search-hook'
+import { useDispatch, useSelector } from 'react-redux'
+import { getLoggedUser } from '../../redux/actions/authAction'
 
 
 
 function NavBarLogin() {
+    // const dispatch = useDispatch()
 
     const [onChangeSearch, searchWord] = NavbarSearchHook();
     let word = "";
     if(localStorage.getItem("searchWord") != null)
          word = localStorage.getItem("searchWord")
 
-
     const [user, setUser] = useState('');
 
     useEffect(() => {
         if(localStorage.getItem("user") != null)
         setUser(JSON.parse(localStorage.getItem("user")))
+
+        // dispatch(getLoggedUser())
+
     }, [])
-    console.log(user)
+
+    // const res = useSelector(state => state.authReducer.currentUser)
+
     const logout = () => {
         localStorage.removeItem("user")
         setUser('')
@@ -49,10 +56,19 @@ function NavBarLogin() {
             <Nav className="me-auto">
             {
                 user != '' ? (
-                    <NavDropdown title={user.name} id="basic-nav-dropdown">
-                        <NavDropdown.Item href="#action/3.2">Profile</NavDropdown.Item>
+                    <NavDropdown title={user.name}id="basic-nav-dropdown">
+                        {
+                            user.role === "admin" ? 
+                            (
+                                <NavDropdown.Item href="/admin/allproducts">Control Panel</NavDropdown.Item>
+                            ) 
+                            : 
+                            (
+                                <NavDropdown.Item href="/user/profile">Profile</NavDropdown.Item>
+                            )
+                        }
+                        <NavDropdown.Divider className='Divider' />
                         <NavDropdown.Item onClick={logout} href="#action/3.3">Sign Out</NavDropdown.Item>
-                        <NavDropdown.Divider />
                     </NavDropdown>
                 ) : ( <Nav.Link href='/login'
                 className="nav-text d-flex mt-3 justify-content-center">

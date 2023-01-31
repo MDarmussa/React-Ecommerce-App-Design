@@ -1,11 +1,12 @@
 import Multiselect from 'multiselect-react-dropdown';
 import React from 'react'
-import { Col, Row, ToastContainer } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import add from '../../images/add.png'
 import { CompactPicker } from 'react-color';
 import MultiImageInput from 'react-multiple-image-input';
 import { useParams } from 'react-router-dom'
 import AdminEditProductsHook from '../../hook/products/edit-product-hook';
+import { ToastContainer } from 'react-toastify';
 
 function AdminEditProducts() {
      const {id} = useParams();
