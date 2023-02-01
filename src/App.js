@@ -66,8 +66,6 @@ function App() {
           <Route path="/user/verify-code" element={<VerifyPasswordPage />} />  
           <Route path="/user/reset-password" element={<ResetPasswordPage/>} />  
 
-          ResetPasswordPage
-
         </Routes>
       </BrowserRouter>
       <Footer />
