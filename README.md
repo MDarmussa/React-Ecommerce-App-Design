@@ -1,12 +1,12 @@
 Ecommerce Full Stack Project:
 
-- hooks folder: Is used for axios to deal with the API (GET, POST, DELETE ...etc)
+- hooks folder: Is used for axios to deal with the API (GET, POST, DELETE, and UPDATE)
 - hook: Contains all functions and logic
 - Page: Contain all the website pages
 - components: Contain all components that belong to all pages
 - API: Contain our states container
 - rootReducer: contains all reducers as combined to send them to the store.js.
-- store.js: contains all reducers (combined, middleware,)
+- store.js: contains root reducer (combined, middleware,)
 
 
 steps for creating Redux, connecting to backend - the setup: // Barnd Section
