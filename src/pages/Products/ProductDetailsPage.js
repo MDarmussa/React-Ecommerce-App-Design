@@ -10,11 +10,17 @@ import viewProductsDetailsHook from '../../hook/products/view-products_details-h
 
 function ProductDetailsPage() {
 
-  const {id} = useParams();
+  const { id } = useParams();
   const [item, images, cat, brand, prod] = viewProductsDetailsHook(id)
+  console.log(item)
 
   if(prod)
     var items = prod.slice(0, 4)
+
+  if(item){
+    var rateAvg = item.ratingsAverage
+    var rateQty = item.ratingsQuantity
+  }
 
 
   return (
@@ -22,7 +28,7 @@ function ProductDetailsPage() {
           <CategoryHeader />
           <Container>
                <ProductDetails />
-               <RateContainer />
+               <RateContainer rateAvg={rateAvg} rateQty={rateQty} />
                <CardProductsContainer products={items} title='Products You Might Like' />
           </Container>
     </div>
