@@ -35,6 +35,7 @@ function App() {
       <NavBarLogin />
       <BrowserRouter>
         <Routes>
+        
           <Route index element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
@@ -65,8 +66,6 @@ function App() {
           <Route path="/user/forget-password" element={<ForgetpasswordPage />} />  
           <Route path="/user/verify-code" element={<VerifyPasswordPage />} />  
           <Route path="/user/reset-password" element={<ResetPasswordPage/>} />  
-
-          ResetPasswordPage
 
         </Routes>
       </BrowserRouter>

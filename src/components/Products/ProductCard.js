@@ -1,13 +1,20 @@
-import React from 'react'
-import { Card, Col, NavItem } from 'react-bootstrap'
+import React, { useEffect, useState } from 'react'
+import { Card, Col } from 'react-bootstrap'
 import rate from '../../images/rate.png'
-import prod1 from '../../images/prod1.png'
-import favoff from '../../images/fav-off.png'
+import favoff from '../../images/fav-on.png'
+import favon from '../../images/fav-off.png'
 import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { addProductToWishList, removeProductToWishList } from '../../redux/actions/wishListAction'
+import { ToastContainer } from 'react-toastify'
+import notify from "../../hook/useNotifaction"
+import productCardHook from '../../hook/products/product-card-hook'
 
-// <Link to="/products/:id" style={{ textDecoration: 'none' }}>  </Link>
 
-function ProductCard({ item }) {
+function ProductCard({ item, favProd }) {
+
+     const [addToWishListData, removeToWishListData, handleFav, favImg] = productCardHook(item, favProd)
+
   return (
      <Col xs="6" sm="6" md="4" lg="3" className="d-flex">
           <Card
@@ -20,17 +27,19 @@ function ProductCard({ item }) {
                backgroundColor: "#FFFFFF",
                boxShadow: "0 2px 2px 0 rgba(151,151,151,0.5)",
                }}>
-               <Link to={`/products/${item._id}`} style={{TextDecoration: 'none'}}>
+               <Link to={`/products/${item._id}`} style={{ textDecoration: 'none' }}>
                     <Card.Img style={{ height: "228px", width: "100%" }} src={item.imageCover} />
                </Link>
                <div className="d-flex justify-content-end mx-2">
                <img
-                    src={favoff}
-                    alt=""
+                    onClick={handleFav}
+                    src={favImg}
+                    alt="favorite"
                     className="text-center"
                     style={{
                          height: "24px",
                          width: "26px",
+                         cursor: "pointer",
                     }}
                />
                </div>
@@ -50,7 +59,7 @@ function ProductCard({ item }) {
                                    height="16px"
                                    width="16px"
                               />
-                              <div className="card-rate mx-2">{item.ratingsQuantity}</div>
+                              <div className="card-rate mx-2">{item.ratingsAverage}</div>
                          </div>
                          <div className="d-flex">
                               <div className="card-price">{item.price}</div>
@@ -60,6 +69,7 @@ function ProductCard({ item }) {
                </Card.Text>
                </Card.Body>
           </Card>
+          <ToastContainer />
      </Col>
   )
 }

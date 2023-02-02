@@ -15,6 +15,7 @@ const useInsertData = async (url, params) => {
           Authorization: `Bearer ${localStorage.getItem("token")}`}
      }
      const res = await baseUrl.post(url, params, config);
+     console.log(res)
      return res;
 }
 
