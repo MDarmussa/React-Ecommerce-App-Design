@@ -23,7 +23,7 @@ export const addProductToWishList = (body) => async(dispatch) => {
 //remove product to wishlist
 export const removeProductToWishList = (prodID) => async(dispatch) => {
      try {
-          const response = await useDeleteData(`/api/v1/wishlist/${prodID}`); //prodID see postman (backend), no body requied, just param id only
+          const response = await useDeleteData(`/api/v1/wishlist/${prodID}`); //prodID see postman (backend), no body requied, just id param only
           dispatch({
                type: REMOVE_FROM_WISHLIST,
                payload: response,
