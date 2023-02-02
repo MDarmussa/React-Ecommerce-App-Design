@@ -57,13 +57,13 @@ export const deleteReviewOnProduct = (id) => async(dispatch) => { //body is json
 
 
 //update review
-export const updateReviewOnProduct = (id, body) => async(dispatch) => { 
+export const updateReviewOnProduct = (id, body) => async(dispatch) => { //d: is for the id that sent in the url, and body because we have object (see postman)
      try {
           const response = await useUpdateData(`/api/v1/reviews/${id}`, body); 
           
           dispatch({
                type: UPDATE_REVIEW,
-               payload: response //payload is coming from BrandReducer
+               payload: response 
           })
      } catch(e) {
           dispatch({

@@ -32,7 +32,7 @@ const reviewReducer = (state = initial, action) => {
           case UPDATE_REVIEW:
                return{
                     ...state,
-                    updateReview: action.payload,
+                    updateReview: action.payload, //means we store the response that we receive then store it in the array updateReview: []
                }
           default:
                return state;

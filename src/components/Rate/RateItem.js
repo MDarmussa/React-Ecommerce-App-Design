@@ -6,7 +6,7 @@ import editicone from '../../images/edit.png'
 import { useParams } from 'react-router-dom'
 import DeleteRateHook from '../../hook/review/delete-rate-hook'
 import { ToastContainer } from 'react-toastify'
-import ReactStars from 'react-rating-stars-component'
+import ReactStars from 'react-rating-stars-component' //see rate post, has same example
 import EditRateHook from '../../hook/review/edit-review-hook'
 
 

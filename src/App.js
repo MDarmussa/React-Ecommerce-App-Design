@@ -35,6 +35,7 @@ function App() {
       <NavBarLogin />
       <BrowserRouter>
         <Routes>
+        
           <Route index element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />

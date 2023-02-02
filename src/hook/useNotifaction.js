@@ -6,7 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 //to make notification to any component
  const notify = (msg, type) => {
      if(type === "warn")
-         toast.error(msg);
+         toast.warn(msg);
      else if(type === "success")
          toast.success(msg)
      else if(type === "error")

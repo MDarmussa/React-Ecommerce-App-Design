@@ -10,7 +10,7 @@ function EditRateHook(review) {
      const dispatch = useDispatch();
 
      const [loading, setLoading] = useState(true)
-     const [newRateText, setNewRateText] = useState(review.review);
+     const [newRateText, setNewRateText] = useState(review.review); //new text that you need to add on the update review (dialog windows)
      const [newRateValue, setNewRateValue] = useState(review.rating);
      const [showEdit, setShowEdit] = useState(false)
 
@@ -24,31 +24,31 @@ function EditRateHook(review) {
           setNewRateValue(val)
      }
 
-     const handleEdit = async () => {
+     const handleEdit = async () => { //how it works: load data when requesting by the user > wait the data to be ready from dispatch, updateReviewOnProduct has two thinds, id and body. id is review._id and body is {review, rating}
           setLoading(true)
-          await dispatch(updateReviewOnProduct(review._id, {
-               review: newRateText,
-               rating: newRateValue
+          await dispatch(updateReviewOnProduct(review._id, { //
+               review: newRateText, //newRateText is the value from user
+               rating: newRateValue //rating: the value is entered from user
           }))
           setLoading(false)
           handleCloseEdit();
      }
 
-     const res = useSelector(state => state.reviewReducer.updateReview)
-
+     const res = useSelector(state => state.reviewReducer.updateReview) //updateReview is in the reducer file
 
      useEffect(() => {
-          if(loading === false)
-               console.log(res)
-               if(res.status && res.status === 200) {
+          if (loading === false) {
+              console.log(res)
+              if(res.status && res.status === 200) {
                     notify("Review Edit Successfully Completed", "success")
-                    setTimeout(() => {
-                         window.location.reload(false)
-                    }, 1000)
-               } else 
-                    notify("There is a problem editting reviews", "error")
-
-     }, [loading])
+                  setTimeout(() => {
+                    window.location.reload(false)
+                  }, 1000);
+              }
+              else
+                  notify("There is a problem editting reviews", "error")
+          }
+      }, [loading])
 
 
 
