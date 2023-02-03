@@ -38,3 +38,14 @@ export const ADD_TO_WISHLIST = "ADD_TO_WISHLIST"
 export const REMOVE_FROM_WISHLIST = "REMOVE_FROM_WISHLIST"
 export const USER_WISHLIST = "USER_WISHLIST"
 
+export const ADD_COUPON = "ADD_COUPON"
+export const GET_All_COUPONS = "GET_All_COUPONS"
+export const DELETE_COUPON = "DELETE_COUPON"
+export const GET_ONE_COUPON = "GET_ONE_COUPON"
+export const EDIT_COUPON = "EDIT_COUPON"
+
+
+
+
+
+

@@ -27,6 +27,8 @@ import AdminEditProductsPage from './pages/Admin/AdminEditProductsPage';
 import ForgetpasswordPage from './pages/Auth/forgetpasswordPage';
 import VerifyPasswordPage from './pages/Auth/verifyPasswordPage';
 import ResetPasswordPage from './pages/Auth/ResetPasswordPage';
+import AdminAddCouponPage from './pages/Admin/AdminAddCouponPage';
+import AdminEditCouponPage from './pages/Admin/AdminEditCouponPage';
 
 
 function App() {
@@ -53,6 +55,10 @@ function App() {
           <Route path="/admin/addcategory" element={<AdminAddCategoryPage />} />
           <Route path="/admin/addsubcategory" element={<AdminAddSubCategoryPage />} />
           <Route path="/admin/addproduct" element={<AdminAddProductPage />} />
+          <Route path="/admin/addcoupon" element={<AdminAddCouponPage/>} /> 
+          <Route path="/admin/editcoupon/:id" element={<AdminEditCouponPage/>} /> 
+
+          
 
           <Route path="/user/allorders" element={<UserAllOrdersPage />} />
           <Route path="/user/favoriteproducts" element={<UserFavoriteProductsPage />} />
@@ -66,6 +72,8 @@ function App() {
           <Route path="/user/forget-password" element={<ForgetpasswordPage />} />  
           <Route path="/user/verify-code" element={<VerifyPasswordPage />} />  
           <Route path="/user/reset-password" element={<ResetPasswordPage/>} />  
+
+          
 
         </Routes>
       </BrowserRouter>
