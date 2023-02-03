@@ -37,6 +37,11 @@ function AdminSideBar() {
                     Add Product
                </div>
                </Link>
+               <Link to="/admin/addcoupon" style={{ textDecoration: 'none' }}>
+               <div className="admin-side-text my-1 border-bottom p-2 mx-auto text-center">
+                    Create Coupon
+               </div>
+               </Link>
 
           </div>
      </div>
