@@ -10,6 +10,7 @@ const useUpdateDataWithImage = async (url, params) => {
      return res;
 }
 
+
 const useUpdateData = async (url, params) => {
      const config={
           headers:{Authorization: `Bearer ${localStorage.getItem("token")}` }
@@ -17,5 +18,6 @@ const useUpdateData = async (url, params) => {
      const res = await baseUrl.put(url, params, config);
      return res;
 }
+
 
 export { useUpdateData, useUpdateDataWithImage } 

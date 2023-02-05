@@ -93,6 +93,7 @@ body {
      top: 20%;
      left: 10%;
    }
+
    .categoty-card-text {
      color: #555550;
      font-family: Almarai;
@@ -101,6 +102,22 @@ body {
      text-align: center;
    }
    
+   .category-admin-card-img {
+    max-width: 120px;
+    max-height: 120px;
+    position: absolute;
+    top: 20%;
+    left: 7%;
+  }
+
+  .categoty-admin-card-text {
+    color: #555550;
+    font-family: Almarai;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 20px;   
+  }
+  
    /* products card style */
    
    .card-title {

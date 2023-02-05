@@ -20,7 +20,8 @@ function AdminEditProducts() {
           <Col sm="8">
           <div className="text-form pb-2"> صور للمنتج</div>
           
-          <MultiImageInput
+          <MultiImageInput 
+          
                 images={images}
                 setImages={setImages}
                 theme={"light"}
@@ -29,7 +30,7 @@ function AdminEditProducts() {
           />
 
           <input
-                value={prodName}
+                
                 onChange={onChangeProdName}
                 type="text"
                 className="input-form d-block mt-3 px-3"

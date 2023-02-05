@@ -10,6 +10,7 @@ import { getOneCategory } from '../../redux/actions/subCategoryAction';
 function AdminEditProductsHook(id) {
 
      const dispatch = useDispatch()
+
      useEffect(() => { 
           const run = async () => {
                await dispatch(getOneProducts(id))
@@ -200,13 +201,15 @@ function AdminEditProductsHook(id) {
           }, 1000)
           
           colors.map((color) => formData.append("availableColors", color)) //to save choosen colors in one array
+
           selectedSubID.map((item) => formData.append("subcategory", item._id))
+
           setTimeout(async () => {
                setLoading(true)
                await dispatch(updateProducts(id, formData))
                setLoading(false)
           }, 1000)
-     }
+     } //end of handleSubmit
 
      //get create message 
      const product = useSelector(state => state.allproducts.updateProducts) //updateProducts from productsReducer.js

@@ -20,7 +20,7 @@ const AddBrandHook = () => {
         event.persist();
         setName(event.target.value)
     }
-
+    
     //when image change save it 
     const onImageChange = (event) => {
         if (event.target.files && event.target.files[0]) {

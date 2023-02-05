@@ -44,12 +44,6 @@ function EditCouponHook(id) { //3) id is coming from AdminEditCoupon
    }, [loadingData])
 
 
-     // if(oneCoupon.data)
-     //      setCouponDate(oneCoupon.data.expire)
-     // if(oneCoupon.data)
-     //      setCouponValue(oneCoupon.data.discount)
-
-
   const onChangeName = (event) => {
      event.persist();
      setCouponName(event.target.value)
@@ -63,7 +57,7 @@ function EditCouponHook(id) { //3) id is coming from AdminEditCoupon
      setCouponValue(event.target.value)
   }
 
-  const onSubmit = async () => {
+  const onSubmit = async (e) => {
      if(couponName === "" || couponDate === "" || couponValue <= 0) {
           notify("Please fill all values", "warn")
           return
@@ -78,7 +72,8 @@ function EditCouponHook(id) { //3) id is coming from AdminEditCoupon
   }
 
   const res = useSelector(state => state.couponReducer.editCoupon)
-  
+  console.log('line 71', res)
+
   useEffect(() => {
      if(loading === false) {
           if(res && res.status === 200){
