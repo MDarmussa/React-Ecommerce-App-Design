@@ -84,7 +84,7 @@ export const editCoupon = (id, body) => async(dispatch) => { //for more info abo
           })
      } catch(e) {
           dispatch({
-               type: GET_ONE_COUPON,
+               type: EDIT_COUPON,
                payload: e.response
           })
      }

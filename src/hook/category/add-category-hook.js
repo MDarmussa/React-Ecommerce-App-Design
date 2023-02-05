@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import avatar from '../../images/avatar.png'
-import { createCategory } from '../../redux/actions/categoryAction'
+import { createCategory, getAllCategory, getAllCategoryLimitPage, getAllCategoryPage } from '../../redux/actions/categoryAction'
 import 'react-toastify/dist/ReactToastify.css';
 import notify from '../../hook/useNotifaction'
 
@@ -31,7 +31,6 @@ function AddCategoryHook() {
          }
      }
  
-     const res = useSelector(state => state.allCategory.category)
  
      //save data in database
      const handleSubmit = async (event) => {
@@ -50,6 +49,8 @@ function AddCategoryHook() {
          await dispatch(createCategory(formData))
          setLoading(false)
      }
+
+     const res = useSelector(state => state.allCategory.category)
  
      useEffect(() => {
          if(loading === false)
@@ -59,8 +60,12 @@ function AddCategoryHook() {
              setSelectedFile(null)
              setLoading(true)
              setTimeout(() => setIsPress(false), 1000)
+             setLoading(true)
              if(res.status === 201) {
                  notify('Uploading completed successfully', 'success')
+                 setTimeout(() => {
+                    window.location.reload(false)
+                 }, 1000) 
              }
              else {
                  notify("Uploading Failed", 'error')
@@ -68,7 +73,37 @@ function AddCategoryHook() {
          }
      }, [loading])
 
-     return [img, name, loading, isPress, handleSubmit, onImageChange, onChangeName] //must be organized same as in AdminCategory (array index must match)
+//get all categories
+    useEffect(() => {
+        const get = async () => {
+            await dispatch(getAllCategory(2)) 
+        }
+        get()
+    }, [])
+
+    const onPress = async (page) => {
+        await dispatch(getAllCategoryLimitPage(page, 2))
+   }
+
+    
+    // console.log('line 81', res)
+    let categories = []
+    let pagination = [];
+
+    try{
+        if(res && res.data.length >= 1)
+            categories = res.data
+        else
+            categories = []
+        
+        if(res.paginationResult)
+            pagination = res.paginationResult.numberOfPages;
+        else
+            pagination = []
+    } catch(e) {console.log(e)}
+
+
+     return [img, name, loading, isPress, handleSubmit, onImageChange, onChangeName, categories, pagination, onPress] //must be organized same as in AdminCategory (array index must match)
  
 }
 

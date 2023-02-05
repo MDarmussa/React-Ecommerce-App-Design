@@ -1,12 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Col, Row, Spinner } from 'react-bootstrap'
 import AddCategoryHook from '../../hook/category/add-category-hook'
 import { ToastContainer, toast } from 'react-toastify';
+import AdminCategoryCard from './AdminCategoryCard';
+import {getAllCategory} from "../../redux/actions/categoryAction"
+import { useDispatch, useSelector } from 'react-redux';
 
 
 function AdminAddCategory() {
 
-const [img, name, loading, isPress, handleSubmit, onImageChange, onChangeName] = AddCategoryHook();
+const [img, name, loading, isPress, handleSubmit, onImageChange, onChangeName, categories, pagination, onPress] = AddCategoryHook();
 
   return (
      <div>
@@ -53,6 +56,24 @@ const [img, name, loading, isPress, handleSubmit, onImageChange, onChangeName] =
             {
                 isPress ? loading ? <Spinner animation="border" variant="primary" /> : <h4>Uploading Completed</h4>: null
             }
+
+            <Row>
+                <Col>
+
+                {
+                    categories ? 
+                    (categories.map((item, index) => {
+                        return <AdminCategoryCard key={index} categories={item} />
+                    })) 
+                    : 
+                    (<h6>No Categories Available</h6>)
+                }
+                    
+                </Col>
+            </Row>
+            
+
+
             <ToastContainer />
      </div>
   )
