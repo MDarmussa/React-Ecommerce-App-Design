@@ -46,11 +46,13 @@ function LoginHook() {
                     console.log(res)
                     if(res.data.token) {
                          localStorage.setItem("token", res.data.token)
-                         localStorage.setItem("user", JSON.stringify(res.data.data))
+                         localStorage.setItem("user", JSON.stringify(res.data.data)) 
                          notify("You Loggedin Successfully", "success")
                          setTimeout(() => {
                               navigate('/')
+                              window.location.reload(false)
                          }, 1500)
+                         // window.location.reload(false)
                     } else {
                          localStorage.removeItem("token")
                          localStorage.removeItem("user")

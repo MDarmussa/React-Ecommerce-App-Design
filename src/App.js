@@ -65,7 +65,7 @@ function App() {
           <Route path="/user/favoriteproducts" element={<UserFavoriteProductsPage />} />
           <Route path="/user/addresses" element={<UserAllAddressPage />} />
           <Route path="/user/add-address" element={<UserAddAddressPage />} />
-          <Route path="/user/edit-address" element={<UserEditAddressPage />} />  
+          <Route path="/user/edit-address/:id" element={<UserEditAddressPage />} />  
           <Route path="/user/profile" element={<UserProfilePage />} />  
           
           <Route path="/admin/editproduct/:id" element={<AdminEditProductsPage />} />  

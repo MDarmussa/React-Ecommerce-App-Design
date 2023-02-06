@@ -4,13 +4,12 @@ import logo from '../../images/logo.png'
 import login from '../../images/login.png'
 import cart from '../../images/cart.png'
 import NavbarSearchHook from '../../hook/search/navbar-search-hook'
-import { useDispatch, useSelector } from 'react-redux'
-import { getLoggedUser } from '../../redux/actions/authAction'
+import { ToastContainer } from 'react-toastify'
+import notify from '../../hook/useNotifaction'
 
 
 
 function NavBarLogin() {
-    // const dispatch = useDispatch()
 
     const [onChangeSearch, searchWord] = NavbarSearchHook();
     let word = "";
@@ -22,17 +21,16 @@ function NavBarLogin() {
     useEffect(() => {
         if(localStorage.getItem("user") != null)
         setUser(JSON.parse(localStorage.getItem("user")))
-
-        // dispatch(getLoggedUser())
-
     }, [])
 
-    // const res = useSelector(state => state.authReducer.currentUser)
 
     const logout = () => {
         localStorage.removeItem("user")
         localStorage.removeItem("token")
         setUser('')
+        setTimeout(() => {
+            notify("You Logout Successfully", "success")
+        }, 1500)
     }
 
 
@@ -69,7 +67,7 @@ function NavBarLogin() {
                             )
                         }
                         <NavDropdown.Divider className='Divider' />
-                        <NavDropdown.Item onClick={logout} href="#action/3.3">Sign Out</NavDropdown.Item>
+                        <NavDropdown.Item onClick={logout} href="/">Sign Out</NavDropdown.Item>
                     </NavDropdown>
                 ) : ( <Nav.Link href='/login'
                 className="nav-text d-flex mt-3 justify-content-center">
@@ -87,6 +85,7 @@ function NavBarLogin() {
             </Nav>
         </Navbar.Collapse>
     </Container>
+    <ToastContainer />
 </Navbar>
   )
 }
