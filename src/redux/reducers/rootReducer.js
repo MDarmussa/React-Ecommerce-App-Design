@@ -9,6 +9,7 @@ import authReducer from "./authReducer";
 import reviewReducer from "./reviewReducer";
 import addToWishListReducer from "./wishListReducer";
 import couponReducer from "./couponReducer";
+import userAddressesReducer from "./useAddressesReducer";
 
 
 
@@ -21,6 +22,7 @@ export default combineReducers({
      reviewReducer: reviewReducer,
      addToWishListReducer : addToWishListReducer,
      couponReducer: couponReducer,
+     userAddressesReducer: userAddressesReducer
      
 })
 
