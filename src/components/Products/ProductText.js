@@ -19,10 +19,10 @@ function ProductText() {
 
   return (
      <div>
-     <Row className="mt-2">
+     <Row className="mt-4">
        <div className="cat-text">{cat.name}: </div>
      </Row>
-     <Row>
+     <Row className="mt-4">
        <Col md="8">
          <div className="cat-title d-inline">
          {item.title} 
@@ -36,7 +36,7 @@ function ProductText() {
          <div className="barnd-text d-inline mx-1">{brand.name}</div>
        </Col>
      </Row>
-     <Row>
+     <Row className="mt-4">
        <Col md="8" className="mt-1 d-flex">
        {
         item.availableColors ? (item.availableColors.map((color, index) => {
@@ -49,8 +49,12 @@ function ProductText() {
           )
         })) : null
        }
-         
+   
        </Col>
+       
+     </Row>
+     <Row className="mt-4">
+          <div className="cat-text d-inline"> Available Items: {item.quantity} </div>
      </Row>
 
      <Row className="mt-4">
@@ -65,7 +69,13 @@ function ProductText() {
      </Row>
      <Row className="mt-4">
        <Col md="12">
-         <div className="product-price d-inline px-3 py-3 border">$ {item.price}</div>
+
+          {item.priceAfterDiscount >= 1 ? (
+            <div className="product-price d-inline px-3 py-3 border"> $
+              <span style={{textDecorationLine: 'line-through'}}>{item.price}</span> {item.priceAfterDiscount}
+            </div>
+          ): <spans className="product-price d-inline px-3 py-3 border" >${item.price}</spans>  }
+        
          <div onClick={addToCartHandle} className="product-cart-add px-3 py-3 d-inline mx-3">Add to Cart</div>
        </Col>
      </Row>

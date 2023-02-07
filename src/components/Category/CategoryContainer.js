@@ -25,7 +25,7 @@ function CategoryContainer({ data, loading }) {
                     loading === false ? (
                     data ? (
                       data.map((item, index) => {
-                        return (<CategoryCard key={index} title={item.name} img={item.image} background={colors[Math.floor(Math.random() * 5) + 1]} />)
+                        return (<CategoryCard key={index} id={item._id} title={item.name} img={item.image} background={colors[Math.floor(Math.random() * 5) + 1]} />)
                       })
                       ) : <h4>No Categories Found</h4>
                       ) : <Spinner animation="border" variant="primary" />

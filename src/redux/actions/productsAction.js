@@ -1,4 +1,4 @@
-import { CREATE_PRODUCTS, GET_All_PRODUCTS, GET_PRODUCT_DETAILS, GET_ERROR, GET_PRODUCT_LIKE, DELETE_PRODUCT, UPDATE_PRODUCT } from "../type";
+import { CREATE_PRODUCTS, GET_All_PRODUCTS, GET_PRODUCT_DETAILS, GET_ERROR, GET_PRODUCT_LIKE, DELETE_PRODUCT, UPDATE_PRODUCT, GET_All_PRODUCTS_BY_CATEGORY, GET_All_PRODUCTS_BY_BRAND } from "../type";
 import { useInsertDataWithImage } from "../../hooks/useInsertData";
 import { useGetData } from "../../hooks/useGetData";
 import useDeleteData from "../../hooks/useDeleteData";
@@ -141,6 +141,43 @@ export const getAllProductsSearch = (queryString) => async (dispatch) => { //thi
           dispatch({
                type: GET_ERROR,
                payload: "Error " + e,
+          })
+     }
+}
+
+
+
+//gat All products by category
+export const getAllProductsByCategory = (page, limit, categoryID) => async (dispatch) => {
+     try {
+          const response = await useGetData(`/api/v1/products?limit=${limit}&page=${page}&category=${categoryID}`)
+          dispatch({
+               type: GET_All_PRODUCTS_BY_CATEGORY,
+               payload: response,
+               loading: true
+          })
+     } catch(e) {
+          dispatch({
+               type: GET_All_PRODUCTS_BY_CATEGORY,
+               payload: e.response,
+          })
+     }
+}
+
+
+//gat All products by brand
+export const getAllProductsByBrand = (page, limit, brandID) => async (dispatch) => {
+     try {
+          const response = await useGetData(`/api/v1/products?limit=${limit}&page=${page}&brand=${brandID}`)
+          dispatch({
+               type: GET_All_PRODUCTS_BY_BRAND,
+               payload: response,
+               loading: true
+          })
+     } catch(e) {
+          dispatch({
+               type: GET_All_PRODUCTS_BY_BRAND,
+               payload: e.response,
           })
      }
 }

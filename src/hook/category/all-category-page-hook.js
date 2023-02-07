@@ -8,7 +8,9 @@ function AllCategoryHook() {
   const dispatch=useDispatch()
   //when first load
   useEffect(() => {
-  dispatch(getAllCategory(6)) //should be similar to # of limit in getAllCategoryPage method in categoryAction.js
+    const get = async () => {
+      await dispatch(getAllCategory(6)) //should be similar to # of limit in getAllCategoryPage method in categoryAction.js
+    }
   }, [])
 
   const category = useSelector(state => state.allCategory.category) //allCategory: from rootReducer, category: from categoryReducer
@@ -16,8 +18,11 @@ function AllCategoryHook() {
 
   //to get page count
   let pageCount = 0;
-  if(category.paginationResult)
+  try {
+    if(category.paginationResult)
     pageCount = category.paginationResult.numberOfPages
+  } catch(e) { }
+ 
 
     //when press pagination
   const getPage=(page)=> {
