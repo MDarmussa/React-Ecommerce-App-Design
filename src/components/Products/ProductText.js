@@ -1,7 +1,9 @@
 import React from 'react'
-import { Row,Col, NavbarBrand } from 'react-bootstrap'
+import { Row,Col } from 'react-bootstrap'
 import { useParams } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import viewProductsDetailsHook from '../../hook/products/view-products_details-hook';
+import AddToCartHook from './../../hook/cart/add-to-cart-hook';
 
 
 function ProductText() {
@@ -9,6 +11,11 @@ function ProductText() {
 
   const {id} = useParams();
   const [item, images, cat, brand] = viewProductsDetailsHook(id);
+
+  const [colorClick, indexColor, addToCartHandle] = AddToCartHook(id, item) //item will be sent as an object to add-to-cart-hook
+
+
+
 
   return (
      <div>
@@ -36,8 +43,9 @@ function ProductText() {
           return (
             <div
             key={index}
-            className="color ms-2 border"
-            style={{ backgroundColor: color }}></div>
+            onClick={() => colorClick(index, color)}
+            className="color ms-2"
+            style={{ backgroundColor: color, border: indexColor === index ? '2px solid black' : 'none' }}></div>
           )
         })) : null
        }
@@ -58,9 +66,10 @@ function ProductText() {
      <Row className="mt-4">
        <Col md="12">
          <div className="product-price d-inline px-3 py-3 border">$ {item.price}</div>
-         <div className="product-cart-add px-3 py-3 d-inline mx-3">Add to Cart</div>
+         <div onClick={addToCartHandle} className="product-cart-add px-3 py-3 d-inline mx-3">Add to Cart</div>
        </Col>
      </Row>
+     <ToastContainer />
    </div>
   )
 }

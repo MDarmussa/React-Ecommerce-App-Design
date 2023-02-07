@@ -6,6 +6,7 @@ import cart from '../../images/cart.png'
 import NavbarSearchHook from '../../hook/search/navbar-search-hook'
 import { ToastContainer } from 'react-toastify'
 import notify from '../../hook/useNotifaction'
+import GetAllUserCartHook from '../../hook/cart/get-all-user-cart-hook'
 
 
 
@@ -32,6 +33,8 @@ function NavBarLogin() {
             notify("You Logout Successfully", "success")
         }, 1500)
     }
+
+    const [itemsNum] = GetAllUserCartHook()
 
 
   return (
@@ -77,10 +80,15 @@ function NavBarLogin() {
             }
                
                 <Nav.Link href='/cart'
-                    className="nav-text d-flex mt-3 justify-content-center"
+                    className="nav-text position-relative d-flex mt-3 justify-content-center"
                     style={{ color: "white" }}>
                     <img src={cart} className="login-img" alt="sfvs" />
                     <p style={{ color: "white" }}>Cart</p>
+
+                    <span class="position-absolute top-10 start-100 translate-middle badge rounded-pill bg-danger">
+                        {itemsNum || 0}
+                    </span>
+
                 </Nav.Link>
             </Nav>
         </Navbar.Collapse>

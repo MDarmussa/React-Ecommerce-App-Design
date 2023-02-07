@@ -12,7 +12,7 @@ function ProductDetailsPage() {
 
   const { id } = useParams();
   const [item, images, cat, brand, prod] = viewProductsDetailsHook(id)
-  console.log(item)
+  // console.log(item)
 
   if(prod)
     var items = prod.slice(0, 4)
