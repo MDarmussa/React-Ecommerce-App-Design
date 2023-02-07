@@ -42,7 +42,6 @@ export const removeProductToWishList = (prodID) => async(dispatch) => {
 export const getProductToWishList = () => async(dispatch) => {
      try {
           const response = await useGetDataToken(`/api/v1/wishlist`);
-          console.log(response)
           dispatch({
                type: USER_WISHLIST,
                payload: response,

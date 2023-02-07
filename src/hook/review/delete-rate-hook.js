@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import notify from '../useNotifaction';
-import { createReview, deleteReviewOnProduct } from './../../redux/actions/reviewAction';
+import { deleteReviewOnProduct } from './../../redux/actions/reviewAction';
 
 
 function DeleteRateHook(review) {
 
      const dispatch = useDispatch();
-     const navigate = useNavigate()
 
      const [isUser, setIsUser] = useState(false)
      const [loading, setLoading] = useState(true)
@@ -19,11 +17,12 @@ function DeleteRateHook(review) {
      let user = JSON.parse(localStorage.getItem("user"))
 
      useEffect(() => {
-          if(review.user._id === user._id)
-               {
-                    setIsUser(true);
-               }
-     }, [])
+          try {
+              if (review.user._id === user._id) {
+                  setIsUser(true);
+              }
+          } catch (e) { }
+      }, [])
 
      const handleDelete = async () => {
           setLoading(true)

@@ -708,3 +708,8 @@ body {
   color: white;
   background-color: beige;
 }
+
+.badge {
+  font-weight: bold !important;
+  font-size: 12px !important;
+}
