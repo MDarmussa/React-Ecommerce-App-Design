@@ -19,7 +19,7 @@ function BrandFeatured({ title, btnTitle }) {
                     loading === false ? (
                     brand.data ? (
                     brand.data.slice(0, 5).map((item, index) => {
-                         return (<BrandCard key={index} img={item.image} />)
+                         return (<BrandCard id={item._id} key={index} img={item.image} />)
                     })
                     ) : <h4>No Brands Found</h4>
                     ) : <Spinner animation="border" variant="primary" />

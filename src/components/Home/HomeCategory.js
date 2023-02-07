@@ -18,7 +18,7 @@ function HomeCategory() {
             loading === false ? (
             category.data ? (
               category.data.slice(0, 5).map((item, index) => {
-                return (<CategoryCard key={index} title={item.name} img={item.image} background={colors[index]} />)
+                return (<CategoryCard key={index} title={item.name} img={item.image} id={item._id} background={colors[index]} />)
               })
               ) : <h4>No Categories Found</h4>
               ) : <Spinner animation="border" variant="primary" />

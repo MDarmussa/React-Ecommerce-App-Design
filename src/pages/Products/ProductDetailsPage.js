@@ -14,13 +14,19 @@ function ProductDetailsPage() {
   const [item, images, cat, brand, prod] = viewProductsDetailsHook(id)
   // console.log(item)
 
-  if(prod)
+  try {
+    if(prod)
     var items = prod.slice(0, 4)
+  } catch(e) { }
 
+
+try {
   if(item){
     var rateAvg = item.ratingsAverage
     var rateQty = item.ratingsQuantity
   }
+} catch(e) {}
+
 
 
   return (
