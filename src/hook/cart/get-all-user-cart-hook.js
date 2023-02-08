@@ -9,10 +9,12 @@ function GetAllUserCartHook() {
      const dispatch = useDispatch()
      const [loading, setLoading] = useState(true)
      const [itemsNum, setItemsNum] = useState(0)
-     const [cardItems, setCardItems] = useState([])
+     const [cartItems, setCartItems] = useState([])
      const [totalCartPrice, setTotalCartPrice] = useState(0)
      const [couponNameRes, setCouponName] = useState('') //couponNameRes becasue we have another one in the file that we need to export it to avoidng conflict... see CartCheckout
      const [totalCartPriceAfterDiscount, setTotalCartPriceAfterDiscount] = useState(0)
+     const [cartID, setCartID] = useState('0')
+
 
 
 
@@ -32,8 +34,9 @@ function GetAllUserCartHook() {
           if(loading === false) {
                if(res && res.status === "success") {
                     setItemsNum(res.numOfCartItems)
-                    setCardItems(res.data.products)
+                    setCartItems(res.data.products)
                     setTotalCartPrice(res.data.totalCartPrice) //totalCartPrice is already done by the backend / no need to do map over price and get the total
+                    setCartID(res.data._id)
                     if(res.data.couponName){
                          setCouponName(res.data.couponName) //from backend
                     } else {
@@ -45,17 +48,18 @@ function GetAllUserCartHook() {
                          setTotalCartPriceAfterDiscount('')
                     }
                } else{
+                    setCartID('0')
                     setCouponName('')
                     setTotalCartPriceAfterDiscount('')
                     setItemsNum(0)
-                    setCardItems([])
+                    setCartItems([])
                     setTotalCartPrice(0)
                }
           }
      }, [loading])
 
 
-     return [itemsNum, cardItems, totalCartPrice, couponNameRes, totalCartPriceAfterDiscount] //it will be sent to NavBarLogin (to show the badge) && CartPage to map over the actual carts..
+     return [itemsNum, cartItems, totalCartPrice, couponNameRes, totalCartPriceAfterDiscount, cartID] //it will be sent to NavBarLogin (to show the badge) && CartPage to map over the actual carts..
 
 }
 export default GetAllUserCartHook

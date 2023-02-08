@@ -93,7 +93,6 @@ export const updateCartItem = (id, body) => async(dispatch) => {
 export const applyCoupon = (body) => async(dispatch) => {
      try {
           const response = await useUpdateData(`/api/v1/cart/applyCoupon`, body); 
-          console.log(response)
           dispatch({
                type: APPLY_COUPON,
                payload: response 
