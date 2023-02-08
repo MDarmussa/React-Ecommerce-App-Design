@@ -6,7 +6,7 @@ import DeleteCartHook from '../../hook/cart/delete-cart-hook'
 
 function CartItem({item}) { // CartItem is coming from CartPage
   // console.log(item.product.imageCover)
-  console.log(item)
+  // console.log(item)
 
   const [handleDeleteCart, show, handleClose, handleShow, handleDeleteItem, itemCount, onChangeCount, handleUpdateCart] = DeleteCartHook(item) //item will be sent to delete-cart-hook
 
@@ -51,7 +51,7 @@ function CartItem({item}) { // CartItem is coming from CartPage
           <Row>
             <Col sm="12" className="mt-1">
               <div className="cat-text d-inline">Brand :</div>
-              <div className="barnd-text d-inline mx-1">{item.product.brand.name || ""} </div>
+              <div className="barnd-text d-inline mx-1">{item.product.brand ? item.product.brand.name : ""} </div>
             </Col>
           </Row>
           <Row>

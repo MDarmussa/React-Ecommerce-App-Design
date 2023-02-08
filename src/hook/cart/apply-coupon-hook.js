@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { applyCoupon } from '../../redux/actions/cartAction'
 import notify from '../useNotifaction'
 
 
-function ApplyCouponHook() {
-
+function ApplyCouponHook(cartItems) {
+     const navigate = useNavigate()
      const dispatch = useDispatch()
 
      const [couponName, setCouponName] = useState('')
@@ -48,7 +49,16 @@ function ApplyCouponHook() {
 
 
 
-     return [couponName, onChangeCoupon, handleSubmitCoupon]
+     const handleCheckout = () => {
+          if(cartItems.length >= 1) {
+               navigate("/order/paymethod")
+          } else {
+               notify("Please Add Products to Your cart first", "warn")
+          }
+     }
+
+
+     return [couponName, onChangeCoupon, handleSubmitCoupon, handleCheckout]
   
 }
 

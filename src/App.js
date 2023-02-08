@@ -73,9 +73,6 @@ function App() {
           <Route path="/user/verify-code" element={<VerifyPasswordPage />} />  
           <Route path="/user/reset-password" element={<ResetPasswordPage/>} />  
 
-          <Route path="/order/paymethod" element={ <ProtectedRoute auth={isUser}> <ChoosePayMethodPage /> </ProtectedRoute>} />
-
-
 
           <Route element={<ProtectedRoute auth={isAdmin} />} >
             <Route path="/admin/allproducts" element={<AdminAllProductPage /> } />
@@ -93,6 +90,7 @@ function App() {
 
           <Route element={<ProtectedRoute auth={isUser} />} >
             <Route path="/user/allorders" element={<UserAllOrdersPage />} />
+            <Route path="/order/paymethod" element={<ChoosePayMethodPage />} />
             <Route path="/user/favoriteproducts" element={<UserFavoriteProductsPage />} />
             <Route path="/user/addresses" element={<UserAllAddressPage />} />
             <Route path="/user/add-address" element={<UserAddAddressPage />} />

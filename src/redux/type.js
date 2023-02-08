@@ -70,6 +70,14 @@ export const APPLY_COUPON = "APPLY_COUPON"
 export const GET_All_PRODUCTS_BY_CATEGORY = "GET_All_PRODUCTS_BY_CATEGORY"
 export const GET_All_PRODUCTS_BY_BRAND = "GET_All_PRODUCTS_BY_BRAND"
 
+export const CREATE_ORDER_CASH = "CREATE_ORDER_CASH"
+export const GET_ALL_ORDERS = "GET_ALL_ORDERS"
+
+
+
+
+
+
 
 
 
