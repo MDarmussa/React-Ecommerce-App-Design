@@ -2,58 +2,63 @@ import React from 'react'
 import { Col,Row } from 'react-bootstrap'
 import mobile from '../../images/mobile.png'
 import deleteicon from '../../images/delete.png'
+import { Link } from 'react-router-dom'
 
-function AdminAllOrdersItem() {
+function AdminAllOrdersItem({ orderItem }) {
+
+  console.log(orderItem)
+
+
+  const formatDate = (dateString) => {
+       const options = { year: "numeric", month: "numeric", day: "numeric" }
+       return new Date(dateString).toLocaleDateString(undefined, options)
+   }
+
   return (
-     <Col xs="12" className="cart-item-body my-2 d-flex px-2">
-        <img width="160px" height="197px" src={mobile} alt="" />
-        <div className="w-100">
-          <Row className="justify-content-between">
-            <Col sm="12" className=" d-flex flex-row justify-content-between">
-              <div className="d-inline pt-2 cat-text">Order # 123</div>
-              <div className="d-flex pt-2 " style={{ cursor: "pointer" }}>
-                <img src={deleteicon} alt="" width="20px" height="24px" />
-                <div className="cat-text d-inline me-2">Delete</div>
-              </div>
-            </Col>
-          </Row>
-          <Row className="justify-content-center mt-2">
-            <Col sm="12" className=" d-flex flex-row justify-content-start">
-              <div className="d-inline pt-2 cat-title">
-                آيفون XR بذاكرة سعة 128 جيجابايت ويدعم تقنية 4G LTE مع تطبيق فيس
-              
-              </div>
-              <div className="d-inline pt-2 cat-rate me-2">4.5</div>
-            </Col>
-          </Row>
-          <Row>
-            <Col sm="12" className="mt-1">
-              <div className="cat-text d-inline">Brand :</div>
-              <div className="barnd-text d-inline mx-1">Apple </div>
-            </Col>
-          </Row>
-          <Row>
-            <Col sm="12" className="mt-1 d-flex">
-              <div
-                className="color ms-2 border"
-                style={{ backgroundColor: "#E52C2C" }}></div>
-            </Col>
-          </Row>
-  
-          <Row className="justify-content-between">
-            <Col sm="12" className=" d-flex flex-row justify-content-between">
-              <div className="d-inline pt-2 d-flex">
-                <div className="cat-text  d-inline">Quantity</div>
-                <input
-                  className="mx-2 "
-                  type="number"
-                  style={{ width: "40px", height: "25px" }}
-                />
-              </div>
-              <div className="d-inline pt-2 barnd-text">$3000</div>
-            </Col>
-          </Row>
-        </div>
+     <Col xs="12">
+      <Link to={`/admin/orders/${orderItem._id}`} style={{textDecoration: 'none'}} className="cart-item-body-admin my-2 px-1 d-flex px-2" >
+          <div className="w-100">
+
+            <Row className="justify-content-between" style={{ cursor: "pointer" }}>
+              <Col sm="12" className=" d-flex flex-row justify-content-between">
+                <div sm="12" className="py-2 order-title">Order# {orderItem.id || 0} <span className='mx-4'> Order Date: {formatDate(orderItem.createdAt)}</span></div>
+              </Col>
+            </Row>
+
+            <Row className="justify-content-center mt-2">
+              <Col sm="12" className=" d-flex flex-row justify-content-start">
+                <div className="d-inline pt-2 cat-title">
+                  Order By: {orderItem.user.name || ''}                 
+                </div>
+                <div style={{ color: 'black' }}  className="d-inline pt-2 cat-rate me-2 p-1"> {orderItem.user.email || ''}</div>
+              </Col>
+            </Row>
+
+            <Row className="d-flex justify-content-between">
+              <Col xs="6" className="d-flex">
+                  <div>
+                        <div style={{ color: 'black' }}  className="d-inline">Delivery Status: </div>
+                        <div className="d-inline mx-2 stat">{orderItem.isDelivered === true ? 'YES' : 'NO'}</div>
+                  </div>
+                  <div>
+                        <div style={{ color: 'black' }}  className="d-inline"> Is Paid: </div>
+                        <div className="d-inline mx-2 stat">{orderItem.isPaid === true ? 'YES' : 'NO'}</div>
+                  </div>
+                  <div>
+                        <div style={{ color: 'black' }} className="d-inline"> Payment Method: </div>
+                        <div className="d-inline mx-2 stat">{orderItem.paymentMethodType === 'cash' ? 'Cash' : 'Card'}</div>
+                  </div>
+              </Col>
+
+              <Col xs="6" className="d-flex justify-content-end">
+                <div>
+                    <div className="barnd-text">${orderItem.totalOrderPrice || 0}</div>
+                </div>
+              </Col>
+            </Row>
+
+          </div>
+        </Link>
      </Col>
   )
 }

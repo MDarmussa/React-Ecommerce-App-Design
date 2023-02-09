@@ -29,7 +29,7 @@ function CartItem({item}) { // CartItem is coming from CartPage
           </Modal>
 
 
-        <img width="160px" height="197px" src={item.product.imageCover || mobile} alt="" />
+        <img width="160px" height="197px" src={item.product.imageCover ? item.product.imageCover : mobile} alt="" />
         <div className="w-100">
           <Row className="justify-content-between">
             <Col sm="12" className=" d-flex flex-row justify-content-between">

@@ -5,7 +5,7 @@ import UserAllOrderCard from './UserAllOrderCard'
 function UserAllOrderItem({ orderItem }) {
 
      //UserAllOrderCard: the loop is to show how many items in the same order, return <UserAllOrderCard key={index} item={item} /> is to send props to UserAllOrderCard.
-     console.log('test for order item', orderItem)
+     // console.log('test for order item', orderItem)
 
      const formatDate = (dateString) => {
           const options = { year: "numeric", month: "numeric", day: "numeric" }
