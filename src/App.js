@@ -42,9 +42,9 @@ function App() {
   
 
   const [isUser, isAdmin, userData] = ProtectedRouteHook()
-  console.log(userData)
-  console.log(isUser)
-  console.log(isAdmin)
+  // console.log(userData)
+  // console.log(isUser)
+  // console.log(isAdmin)
 
 
   return (

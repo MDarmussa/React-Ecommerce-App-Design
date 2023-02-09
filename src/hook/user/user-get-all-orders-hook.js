@@ -36,7 +36,6 @@ function UserGetAllOrdersHook() {
           setLoading(false)
      }
 
-     console.log('date test', get)
      const resAllOrders = useSelector(state => state.orderReducer.getAllOrders)
      useEffect(() => {
           if(loading === false) {
@@ -46,9 +45,6 @@ function UserGetAllOrdersHook() {
                     setPaginate(resAllOrders.paginationResult)
                if(resAllOrders.data)
                     setOrderData(resAllOrders.data)
-
-
-               console.log(resAllOrders)
           }
      }, [loading])
 
