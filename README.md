@@ -55,6 +55,9 @@ Resource & Links
 - https://mybrowseraddon.com/access-control-allow-origin.html?v=0.1.8&type=install
 - https://www.noon.com/      cool website
 - https://www.iconfinder.com/  
+- https://stripe.com/    paymeny method - third party
+- https://stripe.com/docs/stripe-js/react
+- 
 
 
 

@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Row,Col } from 'react-bootstrap'
 import { ToastContainer } from 'react-toastify'
+import GetAllUserCartHook from '../../hook/cart/get-all-user-cart-hook'
+import OrderPayCardHook from '../../hook/checkout/order-pay-card-hook'
 import OrderPayCashHook from '../../hook/checkout/order-pay-cash-hook'
+import notify from '../../hook/useNotifaction'
 import ViewAddressesHook from '../../hook/user/view-addresses-hook'
 
 
@@ -10,7 +13,26 @@ function ChoosePayMethod() {
      const [res] = ViewAddressesHook()
      // console.log(res.data)
      const [handleChooseAddress, addressDetails, HandlcreateOrderCash] = OrderPayCashHook()
-     console.log(addressDetails)
+
+     const [HandlcreateOrderCard] = OrderPayCardHook(addressDetails) //send it as param to OrderPayCardHook
+
+     const [ , , totalCartPrice, , totalCartPriceAfterDiscount, ] = GetAllUserCartHook()
+
+     const [type, setType] = useState('')
+
+     const changePayMethod = (e) => {
+          setType(e.target.value)
+     }
+
+     const handlePay = () => {
+          if(type === 'CARD'){
+               HandlcreateOrderCard();
+          } else if (type === 'CASH') {
+               HandlcreateOrderCash();
+          } else {
+               notify('Please choose payment method', 'warn')
+          }
+     }
    
   return (
      <div>
@@ -19,11 +41,12 @@ function ChoosePayMethod() {
                <Row className="d-flex justify-content-between ">
                     <Col xs="12" className="my-2">
                          <input
+                         onChange={changePayMethod}
                               style={{cursor:"pointer"}}
                               name="group"
                               id="group1"
                               type="radio"
-                              value="Visa"
+                              value="CARD"
                               className="mt-2"
                          />
                          <label style={{cursor:"pointer"}} className="mx-2" for="group1">
@@ -35,11 +58,12 @@ function ChoosePayMethod() {
                <Row className="mt-2">
                     <Col xs="12" className="d-flex">
                          <input
+                         onChange={changePayMethod}
                               style={{cursor:"pointer"}}
                               name="group"
                               id="group2"
                               type="radio"
-                              value="الدفع عند الاستلام"
+                              value="CASH"
                               className="mt-2"
                          />
                          <label style={{cursor:"pointer"}} className="mx-2" for="group1">
@@ -66,8 +90,14 @@ function ChoosePayMethod() {
 
           <Row>
                <Col xs="12" className="d-flex mx-2 btn-space justify-content-end">
-                    <div className="product-price d-inline   border">$34000</div>
-                    <div onClick={HandlcreateOrderCash} className="product-cart-add px-3 pt-2 d-inline me-2"> Complete Purchase</div>
+                    <div className="product-price d-inline   border">
+                         {
+                              totalCartPriceAfterDiscount >= 1 ? 
+                                   `$${totalCartPrice} - After Discount: $${totalCartPriceAfterDiscount}`:
+                                   `$${totalCartPrice} `
+                         }
+                    </div>
+                    <div onClick={handlePay} className="product-cart-add px-3 pt-2 d-inline me-2"> Process Payment</div>
                </Col>
           </Row>
           <ToastContainer />
